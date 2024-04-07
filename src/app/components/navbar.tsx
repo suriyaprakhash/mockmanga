@@ -15,7 +15,7 @@ function Navbar({ parentCallback }: any) {
         parentCallback(newTheme);
     };
     return (
-        <nav className="bg-tertiary-bg text-tertiary-text h-[80px] w-screen grid grid-cols-6 items-center">
+        <nav className="bg-tertiary-bg text-tertiary-text h-[100px] w-screen grid grid-cols-6 items-center">
             <div className="col-span-5 pl-16">MockMango</div>
             <div className="col-span-1 sm:pl-20">
                 <button onClick={toggleTheme}>
