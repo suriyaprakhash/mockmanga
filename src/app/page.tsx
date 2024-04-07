@@ -1,14 +1,17 @@
 'use client'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./components/footer";
 import Hero from "./components/hero";
 import Navbar from "./components/navbar";
 
 export default function Home() {
 
+  // here don't init the theme, it will be set in the useEffects
+  const [theme, setTheme] = useState<string>();
+
   useEffect(() => {
     // if a user has a theme selected
-    const selectedTheme = localStorage.getItem("theme");
+    const selectedTheme: string | null = localStorage.getItem("theme");
 
     if (selectedTheme) {
       document.body.classList.add(selectedTheme);
@@ -19,13 +22,19 @@ export default function Home() {
       document.body.classList.add("light");
     }
 
-  }, []);
+  }, [theme]);
+
+  function themeToggled(selectedTheme: string) {
+    setTheme(selectedTheme ? selectedTheme : 'light');
+  }
 
   return (
-    <main className="{`${stringOfMoreClasses}`} bg-primary-bg text-primary-text lex flex-col items-center justify-between">
-      <Navbar></Navbar>
-      <Hero></Hero>
-      <Footer></Footer>
+    <main className={theme}>
+      <section className="bg-primary-bg text-primary-text lex flex-col items-center justify-between">
+        <Navbar parentCallback={themeToggled}></Navbar>
+        <Hero></Hero>
+        <Footer></Footer>
+      </section>
     </main>
   );
 }

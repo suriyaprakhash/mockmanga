@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function Navbar() {
+function Navbar({parentCallback}: any) {
     const [theme, setTheme] = useState('light');
 
     useEffect(() => {
@@ -12,6 +12,7 @@ function Navbar() {
         const newTheme = theme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
         localStorage.setItem('theme', newTheme);
+        parentCallback(newTheme);
     };
     return (
         <nav className="bg-tertiary-bg text-tertiary-text h-[80px] w-screen grid grid-cols-6 items-center">
