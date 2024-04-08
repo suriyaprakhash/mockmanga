@@ -18,8 +18,10 @@ export default function Home() {
       // if the user preferes to match with OS theme
     } else if (window.matchMedia("prefers-color-scheme: dark")) {
       document.body.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       document.body.classList.add("light");
+      localStorage.setItem("theme", "light");
     }
 
   }, [theme]);

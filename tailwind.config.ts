@@ -10,11 +10,9 @@ const config: Config = {
     colors: {
       "primary-bg": "rgba(var(--primary-bg))",
       "secondary-bg": "rgba(var(--secondary-bg))",
-      "tertiary-bg": "rgba(var(--tertiary-bg))",
 
       "primary-text": "rgba(var(--primary-text))",
       "secondary-text": "rgba(var(--secondary-text))",
-      "tertiary-text": "rgba(var(--tertiary-text))"
     },
     extend: {
       backgroundImage: {

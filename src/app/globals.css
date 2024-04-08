@@ -7,13 +7,11 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
   
-  --primary-bg: 206,237,219;
-  --secondary-bg: 231,222,205;
-  --tertiary-bg: 251,250,248;
+  --primary-bg: 105,143,63;
+  --secondary-bg: 10,18,42;
 
-  --primary-text: 105,143,63;
-  --secondary-text: 128,78,73;
-  --tertiary-text: 10,18,42;
+  --primary-text: 206,237,219;
+  --secondary-text: 251,250,248;
 
 }
 
@@ -21,13 +19,11 @@
   /* --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
-  --primary-bg: 105,143,63;
-  --secondary-bg: 128,78,73;
-  --tertiary-bg: 10,18,42;
+  --primary-bg: 0, 8, 0;
+  --secondary-bg: 1, 2, 8;
 
   --primary-text: 206,237,219;
-  --secondary-text: 231,222,205;
-  --tertiary-text: 251,250,248;
+  --secondary-text: 251,250,248;
 }
 
 @media (prefers-color-scheme: dark) {
