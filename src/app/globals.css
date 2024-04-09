@@ -13,6 +13,11 @@
   --primary-text: 206,237,219;
   --secondary-text: 251,250,248;
 
+  /* components */
+  /* dropdowns */
+  --dropdown-bg: 20, 20, 20;
+  --dropdown-text: 100,237,219;
+
 }
 
 .dark {

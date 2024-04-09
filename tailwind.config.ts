@@ -13,8 +13,13 @@ const config: Config = {
 
       "primary-text": "rgba(var(--primary-text))",
       "secondary-text": "rgba(var(--secondary-text))",
+
+      "dropdown-bg": "rgba(var(--dropdown-bg))",
+      "dropdown-text": "rgba(var(--dropdown-text))",
     },
     extend: {
+      animation: {
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

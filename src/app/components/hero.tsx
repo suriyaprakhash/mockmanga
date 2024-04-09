@@ -4,15 +4,13 @@ import Dropdown, { DropdownItem } from './shared/dropdown/dropdown'
 function Hero() {
 
   const inputList: DropdownItem[] = [{
-    id: 1,
     displayName: 'one'
   },{
-    id: 2,
     displayName: 'two'
-  }]
+  }];
 
-  function categorySelected() {
-
+  function categorySelected(selectedCategory: string) {
+    console.log('Parent Hero: selected category from the Dropdown - ', selectedCategory)
   }
 
   return (
