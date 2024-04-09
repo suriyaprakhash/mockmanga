@@ -7,16 +7,18 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
   
-  --primary-bg: 105,143,63;
-  --secondary-bg: 10,18,42;
+  --primary-bg: 10,80,40;
+  --primary-text: 200,240,220;
 
-  --primary-text: 206,237,219;
-  --secondary-text: 251,250,248;
+  --secondary-bg: 210,250,210;
+  --secondary-text: 60,100,60;
+  /* --secondary-bg: 10, 50, 40;
+  --secondary-text: 100,200,160; */
 
   /* components */
   /* dropdowns */
-  --dropdown-bg: 20, 20, 20;
-  --dropdown-text: 100,237,219;
+  --dropdown-bg: 10, 50, 40;
+  --dropdown-text: 100,200,160;
 
 }
 
@@ -24,11 +26,15 @@
   /* --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
-  --primary-bg: 0, 8, 0;
-  --secondary-bg: 1, 2, 8;
+  --primary-bg: 0, 10, 0;
+  --primary-text: 200,240,220;
 
-  --primary-text: 206,237,219;
-  --secondary-text: 251,250,248;
+  --secondary-bg: 5, 10, 5;
+  --secondary-text: 250,250,250;
+
+  --dropdown-bg: 20, 20, 20;
+  --dropdown-text: 100,200,160;
+  /* --dropdown-text: 100,240,220; */
 }
 
 @media (prefers-color-scheme: dark) {

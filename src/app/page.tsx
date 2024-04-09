@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <main className={theme}>
-      <section className="bg-primary-bg text-primary-text lex flex-col items-center justify-between">
+      <section className="bg-primary-bg text-primary-text lex flex-col items-center justify-between w-[450px] sm:w-screen">
         <Navbar parentCallback={themeToggled}></Navbar>
         <Hero></Hero>
         <Footer></Footer>
