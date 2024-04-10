@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Dropdown, { DropdownItem } from './shared/dropdown/dropdown'
 import Input from './shared/input/input';
+import { Person } from './faker/Person';
+import { Parameters } from './faker/Parameters';
 
 function Hero() {
+
+  const [category, setCategory] = useState<string>('');
+  const [parameters, setParameters] = useState<Parameters>({
+    count: 0
+  });
 
   const categoryList: DropdownItem[] = [{
     displayName: 'First Name'
@@ -11,11 +18,20 @@ function Hero() {
   }];
 
   function categorySelected(selectedCategory: string) {
-    console.log('Parent Hero: selected category from the Dropdown - ', selectedCategory)
+    console.log('Parent Hero: selected category from the Dropdown - ', selectedCategory);
+    setCategory(selectedCategory);
   }
 
   function noOfRecords(noOfRecords: string) {
-    console.log('Parent Hero: selected no of records from the Input - ', noOfRecords)
+    console.log('Parent Hero: selected no of records from the Input - ', noOfRecords);
+    setParameters({
+      count: parseInt(noOfRecords, 10)
+    })
+  }
+
+  function generate() {
+    console.log('Generated data');
+    console.log(Person.firstName(parameters));
   }
 
   return (
@@ -32,7 +48,7 @@ function Hero() {
           <div className="p-3 col-span-2">
             <Input placeholder="No of records" inputParentCallback={noOfRecords} />
           </div>
-          <button className="p-3 col-span-2">Generate</button>
+          <button className="p-3 col-span-2" onClick={generate}>Generate</button>
         </div>
       </section>
     </section>
