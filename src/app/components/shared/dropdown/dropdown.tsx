@@ -47,7 +47,8 @@ function Dropdown(dropdownProps: DropdownProps) {
     return (
         <div className="p-3 text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
             <button className="w-full sm:w-72">
-                <input className="bg-dropdown-bg p-3 w-full sm:w-72 rounded-lg focus:bg-primary-bg" placeholder="Category"
+                <input className="bg-dropdown-bg p-3 w-full sm:w-72 rounded-lg focus:bg-primary-bg 
+                    outline focus:outline-offset-2 focus:outline-dropdown-text focus:outline-4" placeholder="Category"
                     value={inputValue}
                     onChange={handleInputChange}
                     onKeyUp={filterDropdownTrayItems} />

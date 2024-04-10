@@ -15,8 +15,10 @@ function Input(inputProps: InputProps) {
     }
 
     return (
-        <div>
-            <input className="bg-dropdown-bg p-3 rounded-lg focus:bg-primary-bg w-full" placeholder={inputProps.placeholder}
+        <div className="text-dropdown-text">
+            <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:bg-primary-bg 
+                outline focus:outline-offset-2 focus:outline-dropdown-text focus:outline-4"
+                placeholder={inputProps.placeholder}
                 value={inputValue}
                 onChange={handleInputChange}/>
         </div>
