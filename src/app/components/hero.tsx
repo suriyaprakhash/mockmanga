@@ -46,9 +46,9 @@ function Hero() {
       <section className="col-span-3 p-5 sm:col-span-1">
         <div className="border-2 border-primary-text p-5 grid grid-cols-2">
           <div className="p-3 col-span-2">
-            <Input placeholder="No of records" inputParentCallback={noOfRecords} />
+            <Input placeholder="No of records" type="number" inputParentCallback={noOfRecords} />
           </div>
-          <button className="p-3 col-span-2" onClick={generate}>Generate</button>
+          <button className="p-3 col-span-2" onClick={generate} disabled={category.length == 0}>Generate</button>
         </div>
       </section>
     </section>

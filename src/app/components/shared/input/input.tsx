@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
 
+type Type = 'number' | 'string';
+
 interface InputProps {
     placeholder: string;
+    type: Type;
     inputParentCallback: any;
 }
 
 function Input(inputProps: InputProps) {
-    
+
     const [inputValue, setInputValue] = useState<string>('');
 
     function handleInputChange(event: any) {
-        setInputValue(event.target.value);
-        inputProps.inputParentCallback(event.target.value);
+        if (inputProps.type === 'number') {
+            if (!Number.isNaN(Number(event.target.value))) {
+                setInputValue(Number(event.target.value) + '');
+                inputProps.inputParentCallback(Number(event.target.value) + '');
+            }
+        } else {
+            setInputValue(event.target.value);
+            inputProps.inputParentCallback(event.target.value);
+        }
     }
 
     return (
@@ -20,7 +30,8 @@ function Input(inputProps: InputProps) {
                 outline focus:outline-offset-2 focus:outline-dropdown-text focus:outline-4"
                 placeholder={inputProps.placeholder}
                 value={inputValue}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange}
+            />
         </div>
     )
 }
