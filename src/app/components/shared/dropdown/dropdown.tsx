@@ -45,18 +45,18 @@ function Dropdown(dropdownProps: DropdownProps) {
     }
 
     return (
-        <div className="p-3 w-72 text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
-            <button>
-                <input className="bg-dropdown-bg p-3 w-72 rounded-lg focus:bg-primary-bg" placeholder="Category" 
-                    value={inputValue} 
-                    onChange={handleInputChange} 
-                    onKeyUp={filterDropdownTrayItems}/>
+        <div className="p-3 text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
+            <button className="w-full sm:w-72">
+                <input className="bg-dropdown-bg p-3 w-full sm:w-72 rounded-lg focus:bg-primary-bg" placeholder="Category"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyUp={filterDropdownTrayItems} />
             </button>
             {canShowDropdownTray &&
                 <div className="">
-                    <ul className="bg-dropdown-bg/70 p-3 w-72 rounded-lg absolute cursor-pointer">
+                    <ul className="bg-dropdown-bg/70 p-3 sm:w-72 rounded-lg absolute cursor-pointer">
                         {filteredList?.map((item) => (
-                            <li className="p-2 hover:bg-secondary-bg/30 rounded-lg" onClick={selectDropdownTrayItem} key={item.displayName}>{item.displayName}</li>
+                            <li className="p-2  hover:bg-secondary-bg/30 rounded-lg" onClick={selectDropdownTrayItem} key={item.displayName}>{item.displayName}</li>
                         ))}
                     </ul>
 
