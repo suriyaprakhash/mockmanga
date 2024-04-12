@@ -26,14 +26,10 @@ export default function Home() {
 
   }, [theme]);
 
-  function themeToggled(selectedTheme: string) {
-    setTheme(selectedTheme ? selectedTheme : 'light');
-  }
-
   return (
     <main className={theme}>
       <section className="bg-primary-bg text-primary-text lex flex-col items-center justify-between">
-        <Navbar parentCallback={themeToggled}></Navbar>
+        <Navbar parentCallback={setTheme}></Navbar>
         <Hero></Hero>
         <Footer></Footer>
       </section>
