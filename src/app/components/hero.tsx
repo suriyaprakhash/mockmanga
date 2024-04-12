@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Dropdown, { DropdownItem } from './shared/dropdown/dropdown'
-import Input from './shared/input/input';
+import Dropdown, { DropdownItem } from './shared/dropdown'
+import Input from './shared/input';
 import { Person } from './faker/Person';
 import { Parameters } from './faker/Parameters';
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { ThemeContext } from './shared/theme/themeContextProvider';
+import { ThemeContext } from './context/themeContextProvider';
 
 function Navbar() {
     const [theme, setTheme] = useContext(ThemeContext);

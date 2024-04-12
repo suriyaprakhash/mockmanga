@@ -1,6 +1,6 @@
 'use client'
-import { ThemeContextProvider } from "./components/shared/theme/themeContextProvider";
-import Container from "./container";
+import { ThemeContextProvider } from "./components/context/themeContextProvider";
+import Container from "./components/container";
 
 export default function Home() {
   return (

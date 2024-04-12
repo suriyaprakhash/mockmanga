@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
-import Footer from './components/footer'
-import Hero from './components/hero'
-import Navbar from './components/navbar'
-import { ThemeContextType, ThemeContext } from './components/shared/theme/themeContextProvider'
+import Footer from './footer'
+import Hero from './hero'
+import Navbar from './navbar'
+import { ThemeContextType, ThemeContext } from './context/themeContextProvider'
 
 export const Container = () => {
     const [theme, ]: ThemeContextType = useContext(ThemeContext);
@@ -30,7 +30,6 @@ export const Container = () => {
         <main className={theme}>
             <section className="bg-primary-bg text-primary-text lex flex-col items-center justify-between">
                 <Navbar ></Navbar>
-                <div>{theme}</div>
                 <Hero></Hero>
                 <Footer></Footer>
             </section>
