@@ -3,6 +3,7 @@ import Dropdown, { DropdownItem } from './shared/dropdown'
 import Input from './shared/input';
 import { Person } from './faker/Person';
 import { Parameters } from './faker/Parameters';
+import { FakerCategory, availableCategories } from './faker/FakerCategory';
 
 function Hero() {
 
@@ -11,28 +12,17 @@ function Hero() {
     userColumnName?: string;
   }
 
+  const availableCategoriesDropdownList: DropdownItem[] = availableCategories?.map((availableCategory: FakerCategory) => ({
+    displayName: availableCategory.category,
+    desc: availableCategory.desc
+  }));
+
+
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
 
-  const [count, setCount] = useState<number>(0);
   const [parameters, setParameters] = useState<Parameters>({
     count: 0
   });
-
-  const availableCategories: DropdownItem[] = [{
-    displayName: 'zero'
-  }, {
-    displayName: 'one this is the poerson object full name'
-  }, {
-    displayName: 'two'
-  }, {
-    displayName: 'three'
-  }, {
-    displayName: 'four'
-  }, {
-    displayName: 'five'
-  }, {
-    displayName: 'six'
-  }];
 
   function noOfRecords(noOfRecords: string) {
     console.log('Parent Hero: selected no of records from the Input - ', noOfRecords);
@@ -80,7 +70,7 @@ function Hero() {
           {selectedCategories.map((category: Category, index: number) =>
             <div key={category.name} className="grid grid-cols-6">
               <div className="p-3 col-span-6 sm:col-span-3"> <Dropdown
-                itemIndex={index} initialValue={category.name} availableList={availableCategories} dropdownParentCallback={updateCategory} /></div>
+                itemIndex={index} initialValue={category.name} availableList={availableCategoriesDropdownList} dropdownParentCallback={updateCategory} /></div>
               <div className="p-3 col-span-4 sm:col-span-2"><Input placeholder="Field name" type="string" inputParentCallback={undefined} /></div>
 
               <button className="p-3 col-span-2 sm:col-span-1" onClick={() => removeCategory(index)} disabled={selectedCategories.length == 0}>Remove</button>
@@ -101,7 +91,6 @@ function Hero() {
           </div>
         }
       </section>
-
 
     </section>
   )

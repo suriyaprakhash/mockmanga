@@ -2,7 +2,8 @@ import React, { MouseEventHandler, useState } from 'react'
 
 export interface DropdownItem {
     id?: number,
-    displayName: string
+    displayName: string,
+    desc?: string
 }
 
 export interface DropdownProps {
