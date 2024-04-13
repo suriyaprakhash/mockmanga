@@ -4,6 +4,7 @@ import { personFakerCategory } from "./PersonFacade";
 export interface FakerCategory {
     category: string;
     desc?: string;
+    defaultFieldName?: string;    
     methodName?: string;
     class: FakerFacade;
 }

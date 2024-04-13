@@ -74,8 +74,9 @@ function Hero() {
         <div className="border-2 border-primary-text p-5">
           {selectedCategories.map((category: SelectedCategory, index: number) =>
             <div key={category.name} className="grid grid-cols-6">
-              <div className="p-3 col-span-6 sm:col-span-3"> <Dropdown
-                itemIndex={index} initialValue={category.name} availableList={availableFakerCategoriesAsDropdownList} dropdownParentCallback={updateCategory} /></div>
+              <div className="p-3 col-span-6 sm:col-span-3">
+                <Dropdown itemIndex={index} initialValue={category.name} availableList={availableFakerCategoriesAsDropdownList} dropdownParentCallback={updateCategory} />
+              </div>
               <div key={category.name} className="p-3 col-span-4 sm:col-span-2">
                 <Input placeholder="Field name" type="string" inputParentCallback={updateFiledName} index={index} />
               </div>

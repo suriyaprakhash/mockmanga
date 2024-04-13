@@ -13,7 +13,7 @@ export interface DropdownProps {
     initialValue: string
 }
 
-function Dropdown({availableList, dropdownParentCallback, itemIndex, initialValue} : any) {
+function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialValue }: any) {
 
     const [inputValue, setInputValue] = useState<string>(initialValue);
     const [filteredList, setFilteredList] = useState<DropdownItem[]>(resetDropdownTrayItems());
@@ -51,7 +51,7 @@ function Dropdown({availableList, dropdownParentCallback, itemIndex, initialValu
         <div className="pb-2  text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
             <button className="w-full  ">
                 <input className="bg-dropdown-bg p-3 w-full  rounded-lg focus:bg-primary-bg 
-                    outline focus:outline-offset-2 focus:outline-dropdown-text focus:outline-4" 
+                    outline focus:outline-offset-2 focus:outline-dropdown-text focus:outline-4"
                     placeholder="Category"
                     value={inputValue}
                     onChange={handleInputChange}
@@ -59,12 +59,11 @@ function Dropdown({availableList, dropdownParentCallback, itemIndex, initialValu
             </button>
             {canShowDropdownTray &&
                 <div className="">
-                    <ul className="bg-dropdown-bg/70 p-3  rounded-lg absolute cursor-pointer">
+                    <ul className="bg-dropdown-bg/70 p-3 h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto">
                         {filteredList?.map((item) => (
                             <li className="p-2  hover:bg-secondary-bg/30 rounded-lg" onClick={selectDropdownTrayItem} key={item.displayName}>{item.displayName}</li>
                         ))}
                     </ul>
-
                 </div>
             }
 

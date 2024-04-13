@@ -49,60 +49,70 @@ export const personFakerCategory: FakerCategory[] = [
     {
         category: 'Person - Full Name',
         desc: 'Full name',
+        defaultFieldName: 'Full name',
         methodName: 'fullName',
         class: Person
     },
     {
         category: 'Person - First Name',
         desc: 'First name',
+        defaultFieldName: 'First Name',
         methodName: 'firstName',
         class: Person
     },
     {
         category: 'Person - Last Name',
         desc: 'Last name',
+        defaultFieldName: 'Last name',
         methodName: 'lastName',
         class: Person
     },
     {
         category: 'Person - Sex',
         desc: 'Sex',
+        defaultFieldName: 'Sex',
         methodName: 'sex',
         class: Person
     },
     {
         category: 'Person - Gender',
         desc: 'Gender',
+        defaultFieldName: 'Gender',
         methodName: 'gender',
         class: Person
     },
     {
         category: 'Person - Bio',
         desc: 'Bio',
+        defaultFieldName: 'Bio',
         methodName: 'bio',
         class: Person
     },
     {
         category: 'Person -  Job Title',
         desc: 'jobTitle',
+        defaultFieldName: 'Job title',
         methodName: 'jobTitle',
         class: Person
     },
     {
         category: 'Person -  Job Description',
         desc: 'jobDescriptor',
+        defaultFieldName: 'Job description',
         methodName: 'jobDescriptor',
         class: Person
     },
     {
         category: 'Person -  Job Area',
         desc: 'jobArea',
+        defaultFieldName: 'Job area',
         methodName: 'jobArea',
         class: Person
     },
     {
         category: 'Person - Job Type',
         desc: 'jobType',
+        defaultFieldName: 'Job type',
         methodName: 'jobType',
         class: Person
     }
