@@ -46,6 +46,10 @@ function Hero() {
     console.log(Person.firstName(parameters));
   }
 
+  function removeAllCategories() {
+    setSelectedCategories([])
+  }
+
   function addCategory() {
     selectedCategories.push({
       name: ''
@@ -68,6 +72,7 @@ function Hero() {
     console.log(selectedCategories)
   }
 
+
   return (
     <section className="grid grid-cols-3 items-center">
       <section className="col-span-3 p-5 sm:col-span-2">
@@ -82,6 +87,7 @@ function Hero() {
             </div>
           )}
           <button className="p-3 col-span-2" onClick={() => addCategory()}>{selectedCategories.length > 0 ? 'Add' : 'Get started'}</button>
+          {selectedCategories.length > 3 && <button className="p-3 col-span-2" onClick={() => removeAllCategories()}>Reset All</button> }
         </div>
       </section>
 
@@ -91,7 +97,7 @@ function Hero() {
             <div className="p-3 col-span-2">
               <Input placeholder="No of records" type="number" inputParentCallback={noOfRecords} />
             </div>
-            <button className="p-3 col-span-2" onClick={generate} disabled={selectedCategories.length == 0}>Generate</button>
+            <button className="p-3 col-span-2" onClick={generate} disabled={selectedCategories.filter(category => category.name === '').length != 0}>Generate</button>
           </div>
         }
       </section>
