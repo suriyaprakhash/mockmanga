@@ -33,7 +33,7 @@ function Dropdown({availableList, dropdownParentCallback, itemIndex, initialValu
 
     function filterDropdownTrayItems(event: any) {
         const inputFilterValue = event.target.value;
-        const tempList = filteredList.filter(filteredItem => filteredItem.displayName.includes(inputFilterValue));
+        const tempList = filteredList.filter(filteredItem => filteredItem.displayName.toLocaleLowerCase().includes(inputFilterValue.toLocaleLowerCase()));
         setFilteredList(inputFilterValue.length == 0 ? availableList : tempList);
     }
 

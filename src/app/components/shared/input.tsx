@@ -6,6 +6,7 @@ interface InputProps {
     placeholder: string;
     type: Type;
     inputParentCallback: any;
+    index?: number;
 }
 
 function Input(inputProps: InputProps) {
@@ -16,12 +17,11 @@ function Input(inputProps: InputProps) {
         if (inputProps.type === 'number') {
             if (!Number.isNaN(Number(event.target.value))) {
                 setInputValue(Number(event.target.value) + '');
-                inputProps.inputParentCallback(Number(event.target.value) + '');
             }
         } else {
             setInputValue(event.target.value);
-            inputProps.inputParentCallback(event.target.value);
         }
+        inputProps.inputParentCallback(event.target.value, inputProps.index);
     }
 
     return (
