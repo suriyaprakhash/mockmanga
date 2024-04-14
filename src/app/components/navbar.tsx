@@ -11,7 +11,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="bg-secondary-bg text-secondary-text h-[100px] grid grid-cols-6 items-center">
+        <nav className="bg-secondary-bg text-secondary-text sm:h-[10vh] grid grid-cols-6 items-center">
             <div className="col-span-5 pl-16">Mock Manga</div>
             <div className="col-span-1 sm:pl-20">
                 <button onClick={toggleTheme}>

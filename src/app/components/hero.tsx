@@ -94,7 +94,7 @@ function Hero() {
 
 
   return (
-    <section className="grid grid-cols-3 items-center">
+    <section className="grid grid-cols-3 items-center sm:h-[80vh] overflow-auto">
       <section className="col-span-3 p-5 sm:col-span-2">
         <div className="p-5">
           {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
