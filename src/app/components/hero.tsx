@@ -98,7 +98,7 @@ function Hero() {
     <section>
 
       {selectedCategories.length == 0 &&
-        <section className="grid grid-cols-3 items-center sm:h-[70vh] overflow-auto p-10">
+        <section className="grid grid-cols-3 items-center sm:h-[76vh] overflow-auto p-10">
           <div className="col-span-3 sm:col-span-2 p-3 text-3xl pl-12">
             Generate massive amounts of <span className="text-button-danger-bg-hover">realistic mock </span>realistic mock data for testing and development.
             <div className="col-span-3 p-3 text-left text-sm">
