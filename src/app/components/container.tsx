@@ -29,7 +29,7 @@ export const Container = () => {
     
     return (
         <main className={theme}>
-            <section className="bg-primary-bg text-primary-text lex flex-col items-center justify-between">
+            <section className="bg-primary-bg text-primary-text items-center justify-between">
                 <Navbar ></Navbar>
                 <Hero></Hero>
                 <Footer></Footer>
