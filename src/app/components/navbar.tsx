@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from './context/themeContextProvider';
+import Image from 'next/image'
 
 function Navbar() {
     const [theme, setTheme] = useContext(ThemeContext);
@@ -12,7 +13,12 @@ function Navbar() {
 
     return (
         <nav className="bg-secondary-bg text-secondary-text h-[100px] sm:h-[12vh] grid grid-cols-6 items-center">
-            <div className="col-span-5 pl-16 text-2xl">mock<span className="text-button-danger-bg text-3xl font-semibold">manga</span></div>
+            <div className="col-span-5 pl-16 text-2xl flex flex-row gap-2">
+                <Image src="/manga.png" alt="mockManga" width="32" height="32" /> 
+                <div>
+                    mock<span className="text-button-danger-bg text-3xl font-semibold">manga</span>
+                </div>
+            </div>
             <div className="col-span-1 sm:pl-20">
                 <button onClick={toggleTheme}>
                     {theme === 'light' ?

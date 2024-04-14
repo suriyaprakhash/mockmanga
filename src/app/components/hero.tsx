@@ -6,6 +6,7 @@ import { FakerCategory, availableFakerCategories } from './faker/FakerCategory';
 import { Generator } from './faker/Generator';
 import Test from './test/test';
 import Link from 'next/link';
+import Image from 'next/image'
 
 export interface SelectedCategory {
   name: string;
@@ -96,26 +97,43 @@ function Hero() {
 
   return (
     <section>
+      {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
 
       {selectedCategories.length == 0 &&
         <section className="grid grid-cols-3 items-center sm:h-[76vh] overflow-auto p-10">
+
           <div className="col-span-3 sm:col-span-2 p-3 text-3xl pl-12 flex flex-col gap-10">
-            <div className="text-button-danger-bg text-4xl font-semibold">Design, test, and iterate with effortless mocks.</div>
-            <div>
+
+            <div className=" text-button-danger-bg text-4xl font-semibold text-left">
+              Design, test, and iterate with effortless mocks.
+            </div>
+
+            <div className="">
               Generate massive amounts of <span className="text-button-danger-bg-hover">realistic mock </span>realistic mock data for testing and development.
               <div className="col-span-3 pt-2 text-left text-sm">
-              Access massive <span className="text-button-text">csv</span> or <span className="text-button-text">json </span> datasets instantly.
-              {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
+                Access massive <span className="text-button-text">csv</span> or <span className="text-button-text">json </span> datasets instantly.
+              </div>
             </div>
-            </div>
-           
 
           </div>
-          <div className="col-span-3 sm:col-span-1 p-16 items-center text-center">
+
+          <div className="col-span-3 sm:col-span-1 items-center text-center pt-10">
+
+            <div className="hidden sm:block">
+              <div className="p-10 hidden" style={{
+                display: "flex",
+                justifyContent: "center",
+              }}>
+                <Image src="/manga.png" alt="mockManga" width="200" height="200" />
+              </div>
+            </div>
+
             <button className="p-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>
               Get Started
             </button>
+
           </div>
+
 
         </section>
       }
