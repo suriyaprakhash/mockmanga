@@ -64,7 +64,7 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
                     onChange={handleInputChange}
                     onKeyUp={filterDropdownTrayItems} />
             </button>
-            {canShowDropdownTray &&
+            {canShowDropdownTray && filteredList.length > 0 &&
                 <div className="">
                     <ul className="bg-dropdown-tray-bg/90 p-3 h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto">
                         {filteredList?.map((item) => (
@@ -72,7 +72,12 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
                         ))}
                     </ul>
                 </div>
+
             }
+            {filteredList.length == 0 &&
+                <div className="text-button-danger-bg pt-4">
+                    Data set not available
+                </div>}
 
         </div>
     )

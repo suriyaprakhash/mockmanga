@@ -1,5 +1,6 @@
-import { FakerFacade } from "./FakerFacade";
-import { personFakerCategory } from "./PersonFacade";
+import { FakerFacade } from "./facades/FakerFacade";
+import { personFakerCategory } from "./facades/PersonFacade";
+import { phoneFakerCategory } from "./facades/PhoneFacade";
 
 export interface FakerCategory {
     category: string;
@@ -14,6 +15,6 @@ export interface FakerCategory {
 export const availableFakerCategories: FakerCategory[] = initCategories();
 
 function initCategories(): FakerCategory[] {
-    const tempCategories: FakerCategory[] = [...personFakerCategory];
+    const tempCategories: FakerCategory[] = [...personFakerCategory, ...phoneFakerCategory];
     return tempCategories;
 }

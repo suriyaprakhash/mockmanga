@@ -12,7 +12,7 @@ function Navbar() {
 
     return (
         <nav className="bg-secondary-bg text-secondary-text h-[100px] sm:h-[12vh] grid grid-cols-6 items-center">
-            <div className="col-span-5 pl-16">Mock Manga</div>
+            <div className="col-span-5 pl-16 text-2xl">mock<span className="text-button-danger-bg text-3xl font-semibold">manga</span></div>
             <div className="col-span-1 sm:pl-20">
                 <button onClick={toggleTheme}>
                     {theme === 'light' ?

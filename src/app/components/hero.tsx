@@ -99,14 +99,19 @@ function Hero() {
 
       {selectedCategories.length == 0 &&
         <section className="grid grid-cols-3 items-center sm:h-[76vh] overflow-auto p-10">
-          <div className="col-span-3 sm:col-span-2 p-3 text-3xl pl-12">
-            Generate massive amounts of <span className="text-button-danger-bg-hover">realistic mock </span>realistic mock data for testing and development.
-            <div className="col-span-3 p-3 text-left text-sm">
-              Download the dataset in the <span className="text-button-text">csv</span> or <span className="text-button-text">json </span> format
+          <div className="col-span-3 sm:col-span-2 p-3 text-3xl pl-12 flex flex-col gap-10">
+            <div className="text-button-danger-bg text-4xl font-semibold">Design, test, and iterate with effortless mocks.</div>
+            <div>
+              Generate massive amounts of <span className="text-button-danger-bg-hover">realistic mock </span>realistic mock data for testing and development.
+              <div className="col-span-3 pt-2 text-left text-sm">
+              Access massive <span className="text-button-text">csv</span> or <span className="text-button-text">json </span> datasets instantly.
               {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
             </div>
+            </div>
+           
+
           </div>
-          <div className="col-span-3 sm:col-span-1 p-16">
+          <div className="col-span-3 sm:col-span-1 p-16 items-center text-center">
             <button className="p-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>
               Get Started
             </button>
@@ -116,10 +121,10 @@ function Hero() {
       }
 
       {selectedCategories.length > 0 &&
-        <div className="grid grid-cols-3 items-center sm:min-h-[70vh]">
+        <div className="grid grid-cols-3 items-center sm:min-h-[76vh]">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
-              <div className="">Select the category columns</div>
+              <div className="">Select from the available datasets</div>
               {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
                 <div key={selectedCategory.name} className="grid grid-cols-6">
                   <div className="p-3 col-span-6 sm:col-span-3">

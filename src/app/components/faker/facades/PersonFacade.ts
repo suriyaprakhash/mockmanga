@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { FakerCategory } from './FakerCategory';
+import { FakerCategory } from '../FakerCategory';
 import { FakerFacade } from './FakerFacade';
 
 export class Person extends FakerFacade {
@@ -10,6 +10,10 @@ export class Person extends FakerFacade {
 
     public static firstName(): string {
         return faker.person.firstName();
+    }
+
+    public static middleName(): string {
+        return faker.person.middleName();
     }
 
     public static lastName(): string {
@@ -58,6 +62,13 @@ export const personFakerCategory: FakerCategory[] = [
         desc: 'First name',
         defaultFieldName: 'First Name',
         methodName: 'firstName',
+        class: Person
+    },
+    {
+        category: 'Person - Middle Name',
+        desc: 'Middle name',
+        defaultFieldName: 'Middle name',
+        methodName: 'middleName',
         class: Person
     },
     {
