@@ -119,6 +119,7 @@ function Hero() {
         <div className="grid grid-cols-3 items-center sm:min-h-[70vh]">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
+              <div className="">Select the category columns</div>
               {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
                 <div key={selectedCategory.name} className="grid grid-cols-6">
                   <div className="p-3 col-span-6 sm:col-span-3">
@@ -151,7 +152,8 @@ function Hero() {
           <section className=" col-span-3 p-5  sm:col-span-1">
             {selectedCategories.length > 0 &&
               <div className="p-5 grid grid-cols-2 gap-6">
-                <div className="p-3 col-span-2" key={'param'}>
+                {/* <div className="sm:pl-4 col-span-2">Enter the no. of records to generate</div> */}
+                <div className="p-1 col-span-2" key={'param'}>
                   <Input placeholder="No of records" type="number" initialValue={parameters.count} inputParentCallback={noOfRecords} />
                 </div>
                 {selectedCategoriesValid &&
