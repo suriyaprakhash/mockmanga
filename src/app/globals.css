@@ -93,7 +93,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--primary-text));
+  background: rgb(var(--button-danger-bg));
   border-radius: 15px;
 }
 

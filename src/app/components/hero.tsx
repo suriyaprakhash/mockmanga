@@ -74,10 +74,10 @@ function Hero() {
               <div className="p-3 col-span-6 sm:col-span-3">
                 <Dropdown itemIndex={index} initialValue={selectedCategory.name} availableList={availableFakerCategoriesAsDropdownList} dropdownParentCallback={updateCategory} />
               </div>
-              <div className="p-3 col-span-4 sm:col-span-2">
+              <div className="p-3 col-span-5 sm:col-span-2">
                 <Input placeholder="Field name" type="string" inputParentCallback={updateFiledName} index={index} />
               </div>
-              <div className="p-3 col-span-2 sm:col-span-1">
+              <div className="p-3 col-span-1 sm:col-span-1">
                 <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover" onClick={() => removeCategory(index)} disabled={selectedCategories.length == 0}>x</button>
               </div>
             </div>
@@ -89,13 +89,13 @@ function Hero() {
         </div>
       </section>
 
-      <section className=" col-span-3 p-5 sm:col-span-1">
+      <section className=" col-span-3 p-5  sm:col-span-1">
         {selectedCategories.length > 0 &&
-          <div className="p-5 grid grid-cols-2">
+          <div className="p-5 grid grid-cols-2 gap-6">
             <div className="p-3 col-span-2">
               <Input placeholder="No of records" type="number" inputParentCallback={noOfRecords} />
             </div>
-            <button className="p-3 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer"
+            <button className="p-5 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer"
               onClick={makeJson} disabled={selectedCategories.filter(category => category.name === '').length != 0}>Generate</button>
           </div>
         }
