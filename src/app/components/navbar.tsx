@@ -20,6 +20,7 @@ function Navbar() {
                 </div>
             </div>
             <div className="col-span-1 sm:pl-20">
+                
                 <button onClick={toggleTheme}>
                     {theme === 'light' ?
                         <div className="">

@@ -102,7 +102,7 @@ function Hero() {
       {selectedCategories.length == 0 &&
         <section className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh] overflow-auto p-10">
 
-          <div className="col-span-3 sm:col-span-2 p-3 text-3xl pl-12 flex flex-col gap-24 sm:gap-10">
+          <div className="col-span-3 sm:col-span-2 p-3 text-3xl sm:pl-12 flex flex-col gap-24 sm:gap-10">
 
             <div className="text-button-danger-bg text-4xl font-semibold text-left">
               Design, test, and iterate with effortless mocks.
