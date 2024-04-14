@@ -13,7 +13,7 @@ function Navbar() {
 
     return (
         <nav className="bg-secondary-bg text-secondary-text h-[100px] sm:h-[12vh] grid grid-cols-6 items-center">
-            <div className="col-span-5 pl-16 text-2xl flex flex-row gap-2">
+            <div className="col-span-5 pl-8 sm:pl-16 text-2xl flex flex-row gap-2">
                 <Image src="/manga.png" alt="mockManga" width="32" height="32" /> 
                 <div>
                     mock<span className="text-button-danger-bg text-3xl font-semibold">manga</span>

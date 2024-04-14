@@ -100,11 +100,11 @@ function Hero() {
       {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
 
       {selectedCategories.length == 0 &&
-        <section className="grid grid-cols-3 items-center sm:h-[76vh] overflow-auto p-10">
+        <section className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh] overflow-auto p-10">
 
-          <div className="col-span-3 sm:col-span-2 p-3 text-3xl pl-12 flex flex-col gap-10">
+          <div className="col-span-3 sm:col-span-2 p-3 text-3xl pl-12 flex flex-col gap-24 sm:gap-10">
 
-            <div className=" text-button-danger-bg text-4xl font-semibold text-left">
+            <div className="text-button-danger-bg text-4xl font-semibold text-left">
               Design, test, and iterate with effortless mocks.
             </div>
 
@@ -139,7 +139,7 @@ function Hero() {
       }
 
       {selectedCategories.length > 0 &&
-        <div className="grid grid-cols-3 items-center sm:min-h-[76vh]">
+        <div className="grid grid-cols-3 items-center h-[750px] sm:min-h-[76vh]">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
               <div className="">Select from the available datasets</div>
@@ -177,7 +177,7 @@ function Hero() {
               <div className="p-5 grid grid-cols-2 gap-6">
                 {/* <div className="sm:pl-4 col-span-2">Enter the no. of records to generate</div> */}
                 <div className="p-1 col-span-2" key={'param'}>
-                  <Input placeholder="No of records" type="number" initialValue={parameters.count} inputParentCallback={noOfRecords} />
+                  <Input placeholder="No of records to generate" type="number" initialValue={parameters.count} inputParentCallback={noOfRecords} />
                 </div>
                 {selectedCategoriesValid &&
                   parametersValid &&
