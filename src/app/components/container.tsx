@@ -5,10 +5,10 @@ import Navbar from './navbar'
 import { ThemeContextType, ThemeContext } from './context/themeContextProvider'
 
 export const Container = () => {
-    const [theme, ]: ThemeContextType = useContext(ThemeContext);
+    const [theme, setTheme]: ThemeContextType = useContext(ThemeContext);
 
     /**
-     * Initializing the theme
+     * Initializing the theme for the first time load
      */
     useEffect(() => {
         // if a user has a theme selected
@@ -16,13 +16,14 @@ export const Container = () => {
 
         if (selectedTheme) {
             document.body.classList.add(selectedTheme);
+            setTheme(selectedTheme);
             // if the user preferes to match with OS theme
         } else if (window.matchMedia("prefers-color-scheme: dark")) {
-            document.body.classList.add("dark");
             localStorage.setItem("theme", "dark");
+            setTheme("dark");
         } else {
-            document.body.classList.add("light");
             localStorage.setItem("theme", "light");
+            setTheme("light");
         }
     }, []);
     
