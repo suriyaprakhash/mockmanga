@@ -50,8 +50,7 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
     return (
         <div className="pb-2  text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
             <button className="w-full  ">
-                <input className="bg-dropdown-bg p-3 w-full  rounded-lg focus:bg-primary-bg 
-                    outline focus:outline-offset-2 focus:outline-dropdown-text focus:outline-4"
+                <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none"
                     placeholder="Category"
                     value={inputValue}
                     onChange={handleInputChange}

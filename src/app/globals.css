@@ -7,18 +7,28 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
   
-  --primary-bg: 10,80,40;
-  --primary-text: 200,240,220;
+  --primary-bg: 10,50,40;
+  --primary-text: 210,250,210;
 
-  --secondary-bg: 210,250,210;
-  --secondary-text: 60,100,60;
+  --secondary-bg: 10,50,40;
+  --secondary-text: 210,250,210;
   /* --secondary-bg: 10, 50, 40;
   --secondary-text: 100,200,160; */
 
   /* components */
   /* dropdowns */
-  --dropdown-bg: 10, 50, 40;
-  --dropdown-text: 100,200,160;
+  /* --dropdown-bg: 10, 50, 40;
+  --dropdown-text: 240,240,10; */
+  --dropdown-bg: 250,255,255;
+  --dropdown-text: 10,50,40;
+
+  --button-bg: 10,160,60;
+  --button-text: 255,255,250;
+  --button-bg-hover: 10,100,60;
+
+  --button-danger-bg: 240,240,10;
+  --button-danger-text: 51,51,0;
+  --button-danger-bg-hover: 255,255,0;
 
 }
 
@@ -35,6 +45,15 @@
   --dropdown-bg: 10, 30, 20;
   --dropdown-text: 100,200,160;
   /* --dropdown-text: 100,240,220; */
+
+  --button-bg: 10, 50, 40;
+  --button-text: 255,255,100;
+  --button-bg-hover: 10, 60, 20;
+
+  --button-danger-bg: 240,240,10;
+  --button-danger-text: 51,51,0;
+  --button-danger-bg-hover: 255,255,0;
+
 }
 
 @media (prefers-color-scheme: dark) {
