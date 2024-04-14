@@ -1,4 +1,5 @@
-import { FakerCategory, SelectedCategory, availableFakerCategories } from "./FakerCategory";
+import { SelectedCategory } from "../hero";
+import { FakerCategory, availableFakerCategories } from "./FakerCategory";
 import { Parameters } from "./Parameters";
 import { writeStringArrayToCsv } from "./writers/csvWriter";
 

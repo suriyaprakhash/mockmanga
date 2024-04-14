@@ -10,8 +10,6 @@ export interface FakerCategory {
     class: FakerFacade;
 }
 
-
-
 export const availableFakerCategories: FakerCategory[] = initCategories();
 
 function initCategories(): FakerCategory[] {
