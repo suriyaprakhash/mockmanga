@@ -7,20 +7,30 @@ interface InputProps {
     type: Type;
     inputParentCallback: any;
     index?: number;
+    initialValue: string | number;
 }
 
 function Input(inputProps: InputProps) {
 
-    const [inputValue, setInputValue] = useState<string>('');
+    const [inputValue, setInputValue] = useState<string | number>(init());
+
+    function init() {
+        if (typeof inputProps.initialValue === 'number' && inputProps.initialValue === 0) {
+            return ''
+        } else {
+            return inputProps.initialValue === undefined ? '' : inputProps.initialValue
+        }
+    }
 
     function handleInputChange(event: any) {
-        if (inputProps.type === 'number') {
-            if (!Number.isNaN(Number(event.target.value))) {
-                setInputValue(Number(event.target.value) + '');
-            }
-        } else {
-            setInputValue(event.target.value);
-        }
+        // if (inputProps.type === 'number') {
+        //     if (!Number.isNaN(Number(event.target.value))) {
+        //         setInputValue(Number(event.target.value) + '');
+        //     }
+        // } else {
+        //     setInputValue(event.target.value);
+        // }
+        setInputValue(event.target.value);
         inputProps.inputParentCallback(event.target.value, inputProps.index);
     }
 
@@ -29,6 +39,7 @@ function Input(inputProps: InputProps) {
             <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none"
                 placeholder={inputProps.placeholder}
                 value={inputValue}
+                type={inputProps.type}
                 onChange={handleInputChange}
             />
         </div>

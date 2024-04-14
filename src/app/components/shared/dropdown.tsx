@@ -1,4 +1,5 @@
 import React, { MouseEventHandler, useState } from 'react'
+import { SelectedCategory } from '../hero';
 
 export interface DropdownItem {
     id?: number,
@@ -8,19 +9,27 @@ export interface DropdownItem {
 
 export interface DropdownProps {
     availableList: DropdownItem[],
+    selectedCategories: SelectedCategory[];
     dropdownParentCallback: any,
     itemIndex: number,
     initialValue: string
 }
 
-function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialValue }: any) {
+function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialValue, selectedCategories }: DropdownProps) {
 
     const [inputValue, setInputValue] = useState<string>(initialValue);
     const [filteredList, setFilteredList] = useState<DropdownItem[]>(resetDropdownTrayItems());
     const [canShowDropdownTray, setCanShowDropdownTray] = useState<boolean>(false);
 
     function resetDropdownTrayItems() {
-        return availableList;
+        const temp: DropdownItem[] = availableList.map(available => available);
+        selectedCategories.forEach((selectedCategory: any) => {
+            while (temp.findIndex((available: any) => available.displayName === selectedCategory.name) >= 0) {
+                temp.splice(temp.findIndex((available: any) => available.displayName === selectedCategory.name), 1);
+            }
+        })
+
+        return temp;
     }
 
     function showDropdownTray() {
@@ -38,7 +47,6 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
     }
 
     function selectDropdownTrayItem(event: any) {
-        console.log('Dropdown: selected item - ', event.target.textContent);
         setInputValue(event.target.textContent);
         dropdownParentCallback(event.target.textContent, itemIndex);
     }
@@ -58,7 +66,7 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
             </button>
             {canShowDropdownTray &&
                 <div className="">
-                    <ul className="bg-dropdown-bg/70 p-3 h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto">
+                    <ul className="bg-dropdown-tray-bg/90 p-3 h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto">
                         {filteredList?.map((item) => (
                             <li className="p-2  hover:bg-secondary-bg/30 rounded-lg" onClick={selectDropdownTrayItem} key={item.displayName}>{item.displayName}</li>
                         ))}

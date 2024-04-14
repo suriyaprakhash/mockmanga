@@ -9,10 +9,7 @@ export interface FakerCategory {
     class: FakerFacade;
 }
 
-export interface SelectedCategory {
-    name: string;
-    userColumnName?: string;
-}
+
 
 export const availableFakerCategories: FakerCategory[] = initCategories();
 

@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown, { DropdownItem } from './shared/dropdown'
 import Input from './shared/input';
 import { Parameters } from './faker/Parameters';
-import { SelectedCategory, FakerCategory, availableFakerCategories } from './faker/FakerCategory';
+import {  FakerCategory, availableFakerCategories } from './faker/FakerCategory';
 import { Generator } from './faker/Generator';
+import Test from './test/test';
 
+export interface SelectedCategory {
+  name: string;
+  userColumnName?: string;
+}
 
 function Hero() {
 
@@ -13,23 +18,45 @@ function Hero() {
     desc: availableCategory.desc
   }));
 
-
   const [selectedCategories, setSelectedCategories] = useState<SelectedCategory[]>([]);
-
+  const [selectedCategoriesValid, setSelectedCategoriesValid] = useState<boolean>(true);
   const [parameters, setParameters] = useState<Parameters>({
     count: 0
   });
+  const [parametersValid, setParametersValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    validateContent();
+  }, [selectedCategories, parameters]);
+
+  function validateSelectedCategories(): void {
+    const availableCategories: string[] = availableFakerCategoriesAsDropdownList.map(availableCategory => availableCategory.displayName);
+    const valid: boolean = selectedCategories.filter(selectedCategory => {
+      return availableCategories.filter(availableCategory => availableCategory === selectedCategory.name).length > 0;
+    }).length === selectedCategories.length;
+    setSelectedCategoriesValid(valid);
+    console.log('validateSelectedCategories ', valid, selectedCategoriesValid)
+  }
+
+  function validateParameters(): void {
+    setParametersValid(parameters.count > 0)
+  }
+
+  function validateContent(): void {
+    validateParameters();
+    validateSelectedCategories();
+  }
+
+  function makeJson(): void {
+    const generator = new Generator();
+    generator.generate(parameters, selectedCategories);
+  }
 
   function noOfRecords(noOfRecords: string) {
-    console.log('Parent Hero: selected no of records from the Input - ', noOfRecords);
     setParameters({
       count: parseInt(noOfRecords, 10)
     })
-  }
-
-  function makeJson() {
-    const generator = new Generator();
-    generator.generate(parameters, selectedCategories);
+    validateContent();
   }
 
   function removeAllCategories() {
@@ -41,6 +68,7 @@ function Hero() {
       name: ''
     });
     setSelectedCategories(selectedCategories.map(item => item));
+
   }
 
   function removeCategory(index: number) {
@@ -51,7 +79,7 @@ function Hero() {
   function updateCategory(selectedCategory: string, index: number) {
     selectedCategories[index] = {
       name: selectedCategory,
-      userColumnName: ''
+      userColumnName: selectedCategories[index].userColumnName
     }
     setSelectedCategories(selectedCategories.map(item => item));
   }
@@ -72,18 +100,27 @@ function Hero() {
           {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
             <div key={selectedCategory.name} className="grid grid-cols-6">
               <div className="p-3 col-span-6 sm:col-span-3">
-                <Dropdown itemIndex={index} initialValue={selectedCategory.name} availableList={availableFakerCategoriesAsDropdownList} dropdownParentCallback={updateCategory} />
+                <Dropdown itemIndex={index} initialValue={selectedCategory.name} selectedCategories={selectedCategories}
+                  availableList={availableFakerCategoriesAsDropdownList} dropdownParentCallback={updateCategory} />
               </div>
               <div className="p-3 col-span-5 sm:col-span-2">
-                <Input placeholder="Field name" type="string" inputParentCallback={updateFiledName} index={index} />
+                <Input placeholder="Field name" type="string" initialValue={selectedCategory.userColumnName!} inputParentCallback={updateFiledName} index={index} />
               </div>
               <div className="p-3 col-span-1 sm:col-span-1">
-                <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover" onClick={() => removeCategory(index)} disabled={selectedCategories.length == 0}>x</button>
+                <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover" onClick={() => removeCategory(index)}
+                  disabled={selectedCategories.length == 0}>
+                  x
+                </button>
               </div>
             </div>
           )}
           <div className="p-3">
-            <button className="p-3 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>{selectedCategories.length > 0 ? 'Add' : 'Get started'}</button>
+            {selectedCategoriesValid &&
+              <button className="p-3 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>
+                {selectedCategories.length > 0 ? 'Add' : 'Get started'}
+              </button>
+            }
+
             {selectedCategories.length > 3 && <button className="p-3 col-span-2" onClick={() => removeAllCategories()}>Reset All</button>}
           </div>
         </div>
@@ -92,11 +129,15 @@ function Hero() {
       <section className=" col-span-3 p-5  sm:col-span-1">
         {selectedCategories.length > 0 &&
           <div className="p-5 grid grid-cols-2 gap-6">
-            <div className="p-3 col-span-2">
-              <Input placeholder="No of records" type="number" inputParentCallback={noOfRecords} />
+            <div className="p-3 col-span-2" key={'param'}>
+              <Input placeholder="No of records" type="number" initialValue={parameters.count} inputParentCallback={noOfRecords} />
             </div>
-            <button className="p-5 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer"
-              onClick={makeJson} disabled={selectedCategories.filter(category => category.name === '').length != 0}>Generate</button>
+            {selectedCategoriesValid &&
+              parametersValid &&
+              <button className="p-5 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer" onClick={makeJson}>
+                Generate
+              </button>
+            }
           </div>
         }
       </section>

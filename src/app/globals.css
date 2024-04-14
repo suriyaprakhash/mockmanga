@@ -21,6 +21,7 @@
   --dropdown-text: 240,240,10; */
   --dropdown-bg: 250,255,255;
   --dropdown-text: 10,50,40;
+  --dropdown-tray-bg: 230,250,240;
 
   --button-bg: 10,160,60;
   --button-text: 255,255,250;
@@ -44,7 +45,7 @@
 
   --dropdown-bg: 10, 30, 20;
   --dropdown-text: 100,200,160;
-  /* --dropdown-text: 100,240,220; */
+  --dropdown-tray-bg: 5, 20, 10;
 
   --button-bg: 10, 50, 40;
   --button-text: 255,255,100;
@@ -100,4 +101,10 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(var(--primary-bg));
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

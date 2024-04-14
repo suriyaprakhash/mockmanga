@@ -14,6 +14,11 @@ const config: Config = {
       "secondary-bg": "rgba(var(--secondary-bg))",
       "secondary-text": "rgba(var(--secondary-text))",
 
+      
+      "dropdown-bg": "rgba(var(--dropdown-bg))",
+      "dropdown-text": "rgba(var(--dropdown-text))",
+      "dropdown-tray-bg": "rgba(var(--dropdown-tray-bg))",
+
       "button-bg": "rgba(var(--button-bg))",
       "button-text": "rgba(var(--button-text))",
       "button-bg-hover": "rgba(var(--button-bg-hover))",
@@ -22,8 +27,6 @@ const config: Config = {
       "button-danger-text": "rgba(var(--button-danger-text))",
       "button-danger-bg-hover": "rgba(var(--button-danger-bg-hover))",
 
-      "dropdown-bg": "rgba(var(--dropdown-bg))",
-      "dropdown-text": "rgba(var(--dropdown-text))",
     },
     extend: {
       animation: {
