@@ -109,7 +109,7 @@ function Hero() {
             </div>
 
             <div className="">
-              Generate massive amounts of <span className="text-button-danger-bg-hover">realistic mock </span>realistic mock data for testing and development.
+              Generate massive amounts of <span className="text-button-danger-bg-hover">realistic mock </span> data for testing and development.
               <div className="col-span-3 pt-2 text-left text-sm">
                 Access massive <span className="text-button-text">csv</span> or <span className="text-button-text">json </span> datasets instantly.
               </div>
@@ -139,7 +139,7 @@ function Hero() {
       }
 
       {selectedCategories.length > 0 &&
-        <div className="grid grid-cols-3 items-center h-[750px] sm:min-h-[76vh]">
+        <div className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh]">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
               <div className="">Select from the available datasets</div>
