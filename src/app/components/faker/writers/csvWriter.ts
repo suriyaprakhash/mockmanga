@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function writeStringArrayToCsv(data: string[], filename = 'mockManga.csv') {
   const csvContent = data.join('\n');
   const csvBlob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });

@@ -53,6 +53,7 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         setInputValue(event.target.value);
+        dropdownParentCallback(event.target.textContent, itemIndex);
     }
 
     return (

@@ -13,7 +13,14 @@ export class Generator {
     }
 
     public generate(parameters: Parameters, selectedCategories: SelectedCategory[]) {
-        this.handleCsv(selectedCategories, parameters);
+        if (parameters.type === 'json') {
+            this.handleJson(selectedCategories, parameters);
+        } else {
+            this.handleCsv(selectedCategories, parameters);
+        }
+    }
+    
+    private handleJson(selectedCategories: SelectedCategory[], parameters: Parameters) {
     }
 
     private handleCsv(selectedCategories: SelectedCategory[], parameters: Parameters) {
@@ -24,13 +31,13 @@ export class Generator {
         });
         allItems.push(headers!.join(','));
         for (let i = 0; i < parameters.count; i++) {
-            allItems.push(this.makeCsv(selectedCategories));
+            allItems.push(this.makeCsv(selectedCategories).join(','));
         }
         console.log(allItems);
         writeStringArrayToCsv(allItems);
     }
 
-    private makeCsv(selectedCategories: SelectedCategory[]): string {
+    private makeCsv(selectedCategories: SelectedCategory[]): string[] {
         const lineItems: string[] = [];
         selectedCategories.forEach(selectedCategory => {
             const availableFakerCategory: FakerCategory | undefined = this.availableCategoriesMap.get(selectedCategory.name);
@@ -42,7 +49,7 @@ export class Generator {
               console.error(`"${availableFakerCategory?.methodName!}" is not a method of ${availableFakerCategory?.class}`);
             }
         })
-        return lineItems.join(',');
+        return lineItems;
     }
 
 }
