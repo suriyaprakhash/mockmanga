@@ -162,14 +162,13 @@ function Hero() {
                   </div>
                 </div>
               )}
-              <div className="p-3">
+              <div className="p-3 grid grid-cols-8 gap-5">
                 {selectedCategoriesValid && selectedCategories.length > 0 &&
-                  <button className="p-3 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>
+                  <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>
                     Add
                   </button>
                 }
-
-                {selectedCategories.length > 3 && <button className="p-3 col-span-2" onClick={() => removeAllCategories()}>Reset All</button>}
+                {selectedCategories.length > 3 && <button className="p-3 col-span-3 sm:col-start-6 sm:col-end-8 border-2 rounded-2xl border-button-danger-bg" onClick={() => removeAllCategories()}>Reset All</button>}
               </div>
             </div>
           </section>
