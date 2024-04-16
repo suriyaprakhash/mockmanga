@@ -142,6 +142,7 @@ function Hero() {
         <div className="grid grid-cols-3 items-center min-h-[750px] sm:h-[76vh]">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
+              <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
               <div className="">Select from the available datasets</div>
               {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
                 <div key={selectedCategory.name} className="grid grid-cols-6">
