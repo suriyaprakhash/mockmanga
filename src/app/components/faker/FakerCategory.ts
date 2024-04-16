@@ -10,6 +10,7 @@ export interface FakerCategory {
     desc?: string;
     defaultFieldName?: string;
     methodName?: string;
+    type?: 'string' | 'number';
     class: FakerFacade;
 }
 

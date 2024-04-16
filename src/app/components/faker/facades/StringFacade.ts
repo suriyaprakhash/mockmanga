@@ -42,6 +42,7 @@ export const numberFakerCategory: FakerCategory[] = [
         desc: 'String - 1 Digit number',
         defaultFieldName: 'Number',
         methodName: 'oneDigitNumber',
+        type: 'number',
         class: Number
     },
     {
@@ -49,12 +50,14 @@ export const numberFakerCategory: FakerCategory[] = [
         desc: 'String - 1 Digit number',
         defaultFieldName: 'Number',
         methodName: 'twoDigitNumber',
+        type: 'number',
         class: Number
     },{
         category: 'String - 3 Digit number',
         desc: 'String - 3 Digit number',
         defaultFieldName: 'Number',
         methodName: 'threeDigitNumber',
+        type: 'number',
         class: Number
     },
     {
@@ -62,6 +65,7 @@ export const numberFakerCategory: FakerCategory[] = [
         desc: 'String - 5 Digit number',
         defaultFieldName: 'Number',
         methodName: 'fiveDigitNumber',
+        type: 'number',
         class: Number
     },
     {
@@ -69,12 +73,14 @@ export const numberFakerCategory: FakerCategory[] = [
         desc: 'String - 10 Digit number',
         defaultFieldName: 'Phone number',
         methodName: 'tenDigitNumber',
+        type: 'number',
         class: Number
     },{
         category: 'String - Number random length 5',
         desc: 'String - Number length 5',
         defaultFieldName: 'Number',
         methodName: 'randomSizeMaxFive',
+        type: 'number',
         class: Number
     },
     {
@@ -82,6 +88,7 @@ export const numberFakerCategory: FakerCategory[] = [
         desc: 'String - Number length 10',
         defaultFieldName: 'Number',
         methodName: 'randomSizeMaxTen',
+        type: 'number',
         class: Number
     }
     

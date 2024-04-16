@@ -32,7 +32,7 @@ export class Generator {
             allItems.push(indendSpace + '{');
             for (let j = 0; j < selectedCategories.length; j++) {
                 const data: string[] = this.buildData(selectedCategories);
-                const item = indendSpace2 + '"' + selectedCategories[j].userColumnName + '"' + semiColon + data[j];
+                const item = indendSpace2 + '"' + selectedCategories[j].userColumnName + '"' + semiColon + indendSpace + data[j];
                 // allItems.push();
 
                 if (j + 1 < selectedCategories.length) {
@@ -74,7 +74,11 @@ export class Generator {
 
             const method = (availableFakerCategory?.class as any)[availableFakerCategory?.methodName!]; // Type assertion to bypass type safety
             if (typeof method === "function") {
-                lineItems.push('"'+ method() + '"'); // Call the method with argument
+                if (availableFakerCategory?.type == 'number') {
+                    lineItems.push(parseInt(method(), 10) + '')
+                } else {
+                    lineItems.push('"'+ method() + '"'); // Call the method with argument
+                }
             } else {
               console.error(`"${availableFakerCategory?.methodName!}" is not a method of ${availableFakerCategory?.class}`);
             }
