@@ -14,7 +14,7 @@ function Navbar() {
 
     return (
         <nav className="bg-secondary-bg text-secondary-text h-[100px] sm:h-[12vh] grid grid-cols-6 items-center">
-            <Link className="col-span-5 pl-8 sm:pl-16 " href="" target='_blank'>
+            <Link className="col-span-5 pl-8 sm:pl-16 " href="">
                 <div className="text-2xl flex flex-row gap-2">
                     <Image src="/manga.png" alt="mockManga" width="32" height="32" />
                     <div>
