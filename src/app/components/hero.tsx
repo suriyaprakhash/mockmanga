@@ -49,8 +49,9 @@ function Hero() {
     validateSelectedCategories();
   }
 
-  function makeJson(): void {
+  function download(string: 'csv' | 'json'): void {
     const generator = new Generator();
+    parameters.type = string;
     generator.generate(parameters, selectedCategories);
   }
 
@@ -100,7 +101,7 @@ function Hero() {
       {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
 
       {selectedCategories.length == 0 &&
-        <section className="grid grid-cols-3 items-center min-h-[750px] sm:h-[76vh] overflow-auto p-10">
+        <section className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh] overflow-auto p-10">
 
           <div className="col-span-3 sm:col-span-2 p-3 text-3xl sm:pl-12 flex flex-col gap-24 sm:gap-10">
 
@@ -139,7 +140,7 @@ function Hero() {
       }
 
       {selectedCategories.length > 0 &&
-        <div className="grid grid-cols-3 items-center min-h-[750px] sm:h-[76vh]">
+        <div className="grid grid-cols-3 items-center min-h-[750px] sm:min-h-[76vh]">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
@@ -173,18 +174,26 @@ function Hero() {
             </div>
           </section>
 
-          <section className=" col-span-3 p-5  sm:col-span-1">
+          <section className=" col-span-3 p-5 sm:col-span-1 ">
             {selectedCategories.length > 0 &&
-              <div className="p-5 grid grid-cols-2 gap-6">
+              <div className="p-3 pr-10 grid grid-cols-2 gap-6">
                 {/* <div className="sm:pl-4 col-span-2">Enter the no. of records to generate</div> */}
-                <div className="p-1 col-span-2" key={'param'}>
+                <div className="p-3 col-span-2" key={'param'}>
                   <Input placeholder="No of records to generate" type="number" initialValue={parameters.count} inputParentCallback={noOfRecords} />
                 </div>
                 {selectedCategoriesValid &&
                   parametersValid &&
-                  <button className="p-5 col-span-2 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer" onClick={makeJson}>
-                    Generate
-                  </button>
+                  <div className="col-span-2 pl-10 pr-10 grid grid-cols-4 gap-6">
+                    <div className="p-5 col-span-4 text-center">Generate</div>
+                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer" 
+                      onClick={() => download('csv')}>
+                       CSV
+                    </button>
+                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer" 
+                      onClick={() => download('json')}>
+                       JSON
+                    </button>
+                  </div>
                 }
               </div>
             }

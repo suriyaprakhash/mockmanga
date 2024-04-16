@@ -21,7 +21,32 @@ export class Generator {
     }
     
     private handleJson(selectedCategories: SelectedCategory[], parameters: Parameters) {
+        const allItems: string[] = [];
+        const headers: (string | undefined)[] = [];
+        allItems.push('[');
+        // selectedCategories.forEach(selectedCategory => {
+        //     headers.push('"' + selectedCategory.userColumnName + '"')
+        // });
+        for (let i = 0; i < parameters.count; i++) {
+            allItems.push('{');
+            for (let j = 0; j < selectedCategories.length; j++) {
+                const items: string[] = this.buildData(selectedCategories);
+                allItems.push('"' + selectedCategories[j].userColumnName + '"' + ' : ' + items[j]);
+                console.log('"' + selectedCategories[j].userColumnName + '"' + ' : ' + items[j]);
+                if (j + 1 < selectedCategories.length) {
+                    allItems.push(',');
+                }
+            }
+            allItems.push('}');
+            if (i + 1 < parameters.count) {
+                allItems.push(',');
+            }
+        }
+        allItems.push(']');
+        console.log(allItems);
+        writeStringArrayToCsv(allItems, 'json');
     }
+
 
     private handleCsv(selectedCategories: SelectedCategory[], parameters: Parameters) {
         const allItems: string[] = [];
@@ -31,13 +56,13 @@ export class Generator {
         });
         allItems.push(headers!.join(','));
         for (let i = 0; i < parameters.count; i++) {
-            allItems.push(this.makeCsv(selectedCategories).join(','));
+            allItems.push(this.buildData(selectedCategories).join(','));
         }
         console.log(allItems);
-        writeStringArrayToCsv(allItems);
+        writeStringArrayToCsv(allItems, 'csv');
     }
 
-    private makeCsv(selectedCategories: SelectedCategory[]): string[] {
+    private buildData(selectedCategories: SelectedCategory[]): string[] {
         const lineItems: string[] = [];
         selectedCategories.forEach(selectedCategory => {
             const availableFakerCategory: FakerCategory | undefined = this.availableCategoriesMap.get(selectedCategory.name);
