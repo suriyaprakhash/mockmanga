@@ -100,7 +100,7 @@ function Hero() {
       {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
 
       {selectedCategories.length == 0 &&
-        <section className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh] overflow-auto p-10">
+        <section className="grid grid-cols-3 items-center min-h-[750px] sm:h-[76vh] overflow-auto p-10">
 
           <div className="col-span-3 sm:col-span-2 p-3 text-3xl sm:pl-12 flex flex-col gap-24 sm:gap-10">
 
@@ -139,7 +139,7 @@ function Hero() {
       }
 
       {selectedCategories.length > 0 &&
-        <div className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh]">
+        <div className="grid grid-cols-3 items-center min-h-[750px] sm:h-[76vh]">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
               <div className="">Select from the available datasets</div>
