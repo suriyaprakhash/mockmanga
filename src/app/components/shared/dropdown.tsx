@@ -57,7 +57,7 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
     }
 
     return (
-        <div className="pb-2  text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
+        <div className="pb-2 text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
             <button className="w-full  ">
                 <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none"
                     placeholder="Category"
@@ -67,7 +67,7 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
             </button>
             {canShowDropdownTray && filteredList.length > 0 &&
                 <div className="">
-                    <ul className="bg-dropdown-tray-bg/90 p-3 h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto">
+                    <ul className="bg-dropdown-tray-bg/90 p-3 h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto sm:hover:scale-110 transition-all">
                         {filteredList?.map((item) => (
                             <li className="p-2  hover:bg-secondary-bg/30 rounded-lg" onClick={selectDropdownTrayItem} key={item.displayName}>{item.displayName}</li>
                         ))}

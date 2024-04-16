@@ -105,7 +105,7 @@ function Hero() {
 
           <div className="col-span-3 sm:col-span-2 p-3 text-3xl sm:pl-12 flex flex-col gap-24 sm:gap-10">
 
-            <div className="text-button-danger-bg text-4xl font-semibold text-left">
+            <div className="text-button-danger-bg text-4xl font-semibold text-left animate-scale">
               Design, test, and iterate with effortless mocks.
             </div>
 
@@ -129,7 +129,7 @@ function Hero() {
               </div>
             </div>
 
-            <button className="p-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>
+            <button className="p-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover transition-all hover:scale-125" onClick={() => addCategory()}>
               Get Started
             </button>
 
@@ -155,7 +155,7 @@ function Hero() {
                     <Input placeholder="Field name" type="string" initialValue={selectedCategory.userColumnName!} inputParentCallback={updateFiledName} index={index} />
                   </div>
                   <div className="p-3 col-span-1 sm:col-span-1">
-                    <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover" onClick={() => removeCategory(index)}
+                    <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover sm:hover:scale-125 transition-all" onClick={() => removeCategory(index)}
                       disabled={selectedCategories.length == 0}>
                       x
                     </button>
@@ -164,11 +164,11 @@ function Hero() {
               )}
               <div className="p-3 grid grid-cols-8 gap-5">
                 {selectedCategoriesValid && selectedCategories.length > 0 &&
-                  <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover" onClick={() => addCategory()}>
+                  <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover sm:hover:scale-110 transition-all" onClick={() => addCategory()}>
                     Add
                   </button>
                 }
-                {selectedCategories.length > 3 && <button className="p-3 col-span-3 sm:col-start-6 sm:col-end-8 border-2 rounded-2xl border-button-danger-bg" onClick={() => removeAllCategories()}>Reset All</button>}
+                {selectedCategories.length > 3 && <button className="p-3 col-span-3 sm:col-start-6 sm:col-end-8 border-2 rounded-2xl border-button-danger-bg sm:hover:scale-110 transition-all" onClick={() => removeAllCategories()}>Reset All</button>}
               </div>
             </div>
           </section>
@@ -184,11 +184,11 @@ function Hero() {
                   parametersValid &&
                   <div className="col-span-2 pl-10 pr-10 grid grid-cols-4 gap-6">
                     <div className="p-5 col-span-4 text-center">Generate</div>
-                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer" 
+                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all" 
                       onClick={() => download('csv')}>
                        CSV
                     </button>
-                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer" 
+                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all" 
                       onClick={() => download('json')}>
                        JSON
                     </button>

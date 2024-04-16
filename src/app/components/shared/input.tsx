@@ -36,7 +36,7 @@ function Input(inputProps: InputProps) {
 
     return (
         <div className="text-dropdown-text">
-            <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none"
+            <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none sm:hover:scale-110 transition-all"
                 placeholder={inputProps.placeholder}
                 value={inputValue}
                 type={inputProps.type}
