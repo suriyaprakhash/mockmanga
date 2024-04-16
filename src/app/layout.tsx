@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "mockManga",
-  description: "An application to generate mocks",
+  description: "A web application that generates mock or fake data for testing can be a valuable tool for developers and testers",
 };
 
 export default function RootLayout({
