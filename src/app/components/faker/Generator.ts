@@ -21,25 +21,30 @@ export class Generator {
     }
     
     private handleJson(selectedCategories: SelectedCategory[], parameters: Parameters) {
+        const indendSpace = ' ';
+        const indendSpace2 = '  ';
+        const semiColon = ':';
+        const comma = ',';
         const allItems: string[] = [];
         const headers: (string | undefined)[] = [];
         allItems.push('[');
-        // selectedCategories.forEach(selectedCategory => {
-        //     headers.push('"' + selectedCategory.userColumnName + '"')
-        // });
         for (let i = 0; i < parameters.count; i++) {
-            allItems.push('{');
+            allItems.push(indendSpace + '{');
             for (let j = 0; j < selectedCategories.length; j++) {
-                const items: string[] = this.buildData(selectedCategories);
-                allItems.push('"' + selectedCategories[j].userColumnName + '"' + ' : ' + items[j]);
-                console.log('"' + selectedCategories[j].userColumnName + '"' + ' : ' + items[j]);
+                const data: string[] = this.buildData(selectedCategories);
+                const item = indendSpace2 + '"' + selectedCategories[j].userColumnName + '"' + semiColon + data[j];
+                // allItems.push();
+
                 if (j + 1 < selectedCategories.length) {
-                    allItems.push(',');
+                    allItems.push(item + comma);
+                } else {
+                    allItems.push(item);
                 }
             }
-            allItems.push('}');
+            allItems.push(indendSpace + '}');
+
             if (i + 1 < parameters.count) {
-                allItems.push(',');
+                allItems.push(indendSpace + comma);
             }
         }
         allItems.push(']');
