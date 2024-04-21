@@ -28,6 +28,16 @@ export class Person extends FakerFacade {
         return faker.person.gender();
     }
 
+    public static age(): string {
+        return faker.number.int({
+            min: 0, max: 130
+        }) + '';
+    }
+    
+    public static email(): string {
+        return faker.internet.email();
+    }
+
     public static bio(): string {
         return faker.person.bio();
     }
@@ -90,6 +100,19 @@ export const personFakerCategory: FakerCategory[] = [
         desc: 'Gender',
         defaultFieldName: 'Gender',
         methodName: 'gender',
+        class: Person
+    }, {
+        category: 'Person - Age',
+        desc: 'Age (0 - 130)',
+        defaultFieldName: 'Gender',
+        type: 'number',
+        methodName: 'age',
+        class: Person
+    },{
+        category: 'Person - Email',
+        desc: 'Email address',
+        defaultFieldName: 'Email',
+        methodName: 'email',
         class: Person
     },
     {

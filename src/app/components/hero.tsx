@@ -110,7 +110,7 @@ function Hero() {
             </div>
 
             <div className="">
-              Generate massive amounts of <span className="text-button-danger-bg-hover">realistic mock </span> data for testing and development.
+              Generate massive amounts of <span className="text-button-danger-bg-hover">realistic random mock </span> data for testing and development.
               <div className="col-span-3 pt-2 text-left text-sm">
                 Access massive <span className="text-button-text">csv</span> or <span className="text-button-text">json </span> datasets instantly.
               </div>
