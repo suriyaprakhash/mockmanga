@@ -15,7 +15,8 @@ function Input(inputProps: InputProps) {
     const [inputValue, setInputValue] = useState<string | number>(init());
 
     function init() {
-        if (typeof inputProps.initialValue === 'number' && inputProps.initialValue === 0) {
+        console.log('inputProps.initialValue ', inputProps.initialValue)
+        if (inputProps.type === 'number') {
             return ''
         } else {
             return inputProps.initialValue === undefined ? '' : inputProps.initialValue

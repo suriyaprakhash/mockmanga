@@ -7,6 +7,7 @@ import { Generator } from './faker/Generator';
 import Test from './test/test';
 import Link from 'next/link';
 import Image from 'next/image'
+import Category from './category';
 
 export interface SelectedCategory {
   name: string;
@@ -31,13 +32,13 @@ function Hero() {
     validateContent();
   }, [selectedCategories, parameters]);
 
+
   function validateSelectedCategories(): void {
     const availableCategories: string[] = availableFakerCategoriesAsDropdownList.map(availableCategory => availableCategory.displayName);
     const valid: boolean = selectedCategories.filter(selectedCategory => {
       return availableCategories.filter(availableCategory => availableCategory === selectedCategory.name).length > 0;
     }).length === selectedCategories.length;
     setSelectedCategoriesValid(valid);
-    console.log('validateSelectedCategories ', valid, selectedCategoriesValid)
   }
 
   function validateParameters(): void {
@@ -95,7 +96,6 @@ function Hero() {
     setSelectedCategories(selectedCategories.map(item => item));
   }
 
-
   return (
     <section>
       {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
@@ -132,9 +132,7 @@ function Hero() {
             <button className="p-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover transition-all hover:scale-125" onClick={() => addCategory()}>
               Get Started
             </button>
-
           </div>
-
 
         </section>
       }
@@ -146,29 +144,22 @@ function Hero() {
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
               <div className="">Select from the available datasets</div>
               {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
-                <div key={selectedCategory.name} className="grid grid-cols-6">
-                  <div className="p-3 col-span-6 sm:col-span-3">
-                    <Dropdown itemIndex={index} initialValue={selectedCategory.name} selectedCategories={selectedCategories}
-                      availableList={availableFakerCategoriesAsDropdownList} dropdownParentCallback={updateCategory} />
-                  </div>
-                  <div className="p-3 col-span-5 sm:col-span-2">
-                    <Input placeholder="Field name" type="string" initialValue={selectedCategory.userColumnName!} inputParentCallback={updateFiledName} index={index} />
-                  </div>
-                  <div className="p-3 col-span-1 sm:col-span-1">
-                    <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover sm:hover:scale-125 transition-all" onClick={() => removeCategory(index)}
-                      disabled={selectedCategories.length == 0}>
-                      x
-                    </button>
-                  </div>
+                <div key={index}>
+                  <Category selectedCategory={selectedCategory} index={index} availableFakerCategoriesAsDropdownList={availableFakerCategoriesAsDropdownList}
+                    selectedCategories={selectedCategories} updateCategory={updateCategory} updateFiledName={updateFiledName} removeCategory={removeCategory} />
                 </div>
               )}
               <div className="p-3 grid grid-cols-8 gap-5">
                 {selectedCategoriesValid && selectedCategories.length > 0 &&
-                  <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover sm:hover:scale-110 transition-all" onClick={() => addCategory()}>
+                  <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover 
+                    sm:hover:scale-110 transition-all" onClick={() => addCategory()}>
                     Add
                   </button>
                 }
-                {selectedCategories.length > 3 && <button className="p-3 col-span-3 sm:col-start-6 sm:col-end-8 border-2 rounded-2xl border-button-danger-bg sm:hover:scale-110 transition-all" onClick={() => removeAllCategories()}>Reset All</button>}
+                {selectedCategories.length > 3 &&
+                  <button className="p-3 col-span-3 sm:col-start-6 sm:col-end-8 border-2 rounded-2xl 
+                    border-button-danger-bg sm:hover:scale-110 transition-all" onClick={() => removeAllCategories()}>Reset All</button>
+                }
               </div>
             </div>
           </section>
@@ -178,19 +169,19 @@ function Hero() {
               <div className="p-3 pr-10 grid grid-cols-2 gap-6">
                 {/* <div className="sm:pl-4 col-span-2">Enter the no. of records to generate</div> */}
                 <div className="p-3 col-span-2" key={'param'}>
-                  <Input placeholder="No of records to generate" type="number" initialValue={parameters.count} inputParentCallback={noOfRecords} />
+                  <Input initialValue={parameters.count} inputParentCallback={noOfRecords} placeholder="No of records to generate" type="number" />
                 </div>
                 {selectedCategoriesValid &&
                   parametersValid &&
                   <div className="col-span-2 pl-10 pr-10 grid grid-cols-4 gap-6">
                     <div className="p-5 col-span-4 text-center">Generate</div>
-                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all" 
+                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all"
                       onClick={() => download('csv')}>
-                       CSV
+                      CSV
                     </button>
-                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all" 
+                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all"
                       onClick={() => download('json')}>
-                       JSON
+                      JSON
                     </button>
                   </div>
                 }

@@ -38,25 +38,19 @@ export class Person extends FakerFacade {
         return faker.internet.email();
     }
 
+    public static password(): string {
+        return faker.internet.password();
+    }
+
+    public static userName(): string {
+        return faker.internet.userName();
+    }
+
     public static bio(): string {
         return faker.person.bio();
     }
 
-    public static jobTitle(): string {
-        return faker.person.jobTitle();
-    }
 
-    public static jobDescriptor(): string {
-        return faker.person.jobDescriptor();
-    }
-
-    public static jobArea(): string {
-        return faker.person.jobArea();
-    }
-
-    public static jobType(): string {
-        return faker.person.jobType();
-    }
 }
 
 export const personFakerCategory: FakerCategory[] = [
@@ -114,40 +108,25 @@ export const personFakerCategory: FakerCategory[] = [
         defaultFieldName: 'Email',
         methodName: 'email',
         class: Person
+    },{
+        category: 'Person - Password',
+        desc: 'Password',
+        defaultFieldName: 'Password',
+        methodName: 'password',
+        class: Person
+    },
+    {
+        category: 'Person - User Name',
+        desc: 'User Name',
+        defaultFieldName: 'User Name',
+        methodName: 'userName',
+        class: Person
     },
     {
         category: 'Person - Bio',
         desc: 'Bio',
         defaultFieldName: 'Bio',
         methodName: 'bio',
-        class: Person
-    },
-    {
-        category: 'Person -  Job Title',
-        desc: 'jobTitle',
-        defaultFieldName: 'Job title',
-        methodName: 'jobTitle',
-        class: Person
-    },
-    {
-        category: 'Person -  Job Description',
-        desc: 'jobDescriptor',
-        defaultFieldName: 'Job description',
-        methodName: 'jobDescriptor',
-        class: Person
-    },
-    {
-        category: 'Person -  Job Area',
-        desc: 'jobArea',
-        defaultFieldName: 'Job area',
-        methodName: 'jobArea',
-        class: Person
-    },
-    {
-        category: 'Person - Job Type',
-        desc: 'jobType',
-        defaultFieldName: 'Job type',
-        methodName: 'jobType',
         class: Person
     }
     

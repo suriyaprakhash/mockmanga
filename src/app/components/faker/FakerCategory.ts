@@ -1,5 +1,6 @@
 import { dateFakerCategory } from "./facades/DateFacade";
 import { FakerFacade } from "./facades/FakerFacade";
+import { jobFakerCategory } from "./facades/JobFacade";
 import { locationFakerCategory } from "./facades/LocationFacade";
 import { personFakerCategory } from "./facades/PersonFacade";
 import { phoneFakerCategory } from "./facades/PhoneFacade";
@@ -20,6 +21,7 @@ function initCategories(): FakerCategory[] {
     const tempCategories: FakerCategory[] = [
         ...personFakerCategory,
         ...phoneFakerCategory,
+        ...jobFakerCategory,
         ...numberFakerCategory, ...uuidFakerCategory, ...alphaFakerCategory, ...alphaNumericFakerCategory,
         ...dateFakerCategory,
         ...locationFakerCategory];
