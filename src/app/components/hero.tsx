@@ -16,13 +16,16 @@ export interface SelectedCategory {
 
 function Hero() {
 
-  const availableFakerCategoriesAsDropdownList: DropdownItem[] = availableFakerCategories?.map((availableCategory: FakerCategory) => ({
-    displayName: availableCategory.category,
-    desc: availableCategory.desc
-  }));
+
+  const [availableCategories, setAvailableCategories] = useState<Category[]>(availableFakerCategories?.map((availableCategory: FakerCategory) => ({
+    name: availableCategory.category,
+    desc: availableCategory.desc,
+    defaultFieldName: availableCategory.defaultFieldName
+  })));
 
   const [selectedCategories, setSelectedCategories] = useState<SelectedCategory[]>([]);
   const [selectedCategoriesValid, setSelectedCategoriesValid] = useState<boolean>(true);
+
   const [parameters, setParameters] = useState<Parameters>({
     count: 0
   });
@@ -32,11 +35,15 @@ function Hero() {
     validateContent();
   }, [selectedCategories, parameters]);
 
+  // useEffect(() => {
+  //   computeAvailableCategories(selectedCategories);
+  // }, [selectedCategories]);
+
 
   function validateSelectedCategories(): void {
-    const availableCategories: string[] = availableFakerCategoriesAsDropdownList.map(availableCategory => availableCategory.displayName);
+    const tempAvailableCategories: string[] = availableFakerCategories.map(availableCategory => availableCategory.category);
     const valid: boolean = selectedCategories.filter(selectedCategory => {
-      return availableCategories.filter(availableCategory => availableCategory === selectedCategory.name).length > 0;
+      return tempAvailableCategories.filter(availableCategory => availableCategory === selectedCategory.name).length > 0;
     }).length === selectedCategories.length;
     setSelectedCategoriesValid(valid);
   }
@@ -69,10 +76,10 @@ function Hero() {
 
   function addCategory() {
     selectedCategories.push({
-      name: ''
+      name: '',
+      userColumnName: ''
     });
     setSelectedCategories(selectedCategories.map(item => item));
-
   }
 
   function removeCategory(index: number) {
@@ -80,21 +87,42 @@ function Hero() {
     setSelectedCategories(selectedCategories.map(item => item));
   }
 
-  function updateCategory(selectedCategory: string, index: number) {
+  function updateCategory(selectedCategory: SelectedCategory, index: number) {
     selectedCategories[index] = {
-      name: selectedCategory,
-      userColumnName: selectedCategories[index].userColumnName
+      name: selectedCategory.name,
+      userColumnName: selectedCategory.userColumnName
     }
     setSelectedCategories(selectedCategories.map(item => item));
   }
 
-  function updateFiledName(fieldName: string, index: number) {
-    selectedCategories[index] = {
-      name: selectedCategories[index].name,
-      userColumnName: fieldName
-    }
-    setSelectedCategories(selectedCategories.map(item => item));
+
+  function computeAvailableCategories(selectedCategories: SelectedCategory[]) {
+    // const tempAvailableCategories: (Category | null)[] = availableFakerCategories?.map((availableCategory: FakerCategory) => {
+    //   if (selectedCategories.find(selectedCategory => selectedCategory.name === availableCategory.category)) {
+    //     return null;
+    //   } else {
+    //     return {
+    //       name: availableCategory.category,
+    //       desc: availableCategory.desc,
+    //       defaultFieldName: availableCategory.defaultFieldName
+    //     }
+    //   }
+    // })
+    // const filteredAvailableCategories: Category[] = [];
+    // for (const category of tempAvailableCategories) {
+    //   if (category !== null) {
+    //     filteredAvailableCategories.push(category);
+    //   }
+    // }
+    const tempAvailableCategories: Category[] = availableFakerCategories.map(availableCategory => ({
+      name: availableCategory.category,
+      desc: availableCategory.desc,
+      defaultFieldName: availableCategory.defaultFieldName
+    }));
+    setAvailableCategories(tempAvailableCategories);
+
   }
+
 
   return (
     <section>
@@ -145,8 +173,8 @@ function Hero() {
               <div className="">Select from the available datasets</div>
               {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
                 <div key={index}>
-                  <Category selectedCategory={selectedCategory} index={index} availableFakerCategoriesAsDropdownList={availableFakerCategoriesAsDropdownList}
-                    selectedCategories={selectedCategories} updateCategory={updateCategory} updateFiledName={updateFiledName} removeCategory={removeCategory} />
+                  <Category selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
+                    selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />
                 </div>
               )}
               <div className="p-3 grid grid-cols-8 gap-5">

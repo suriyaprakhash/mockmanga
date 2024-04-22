@@ -34,7 +34,6 @@ export default function RootLayout({
           `,
             }}
           />
-          {/* Your component content */}
         </div>
         {children}
       </body>

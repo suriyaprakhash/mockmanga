@@ -9,27 +9,28 @@ export interface DropdownItem {
 
 export interface DropdownProps {
     availableList: DropdownItem[],
-    selectedCategories: SelectedCategory[];
+    // selectedCategories: SelectedCategory[];
     dropdownParentCallback: any,
-    itemIndex: number,
+    // itemIndex: number,
     initialValue: string
 }
 
-function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialValue, selectedCategories }: DropdownProps) {
+function Dropdown({ availableList, dropdownParentCallback, initialValue }: DropdownProps) {
 
     const [inputValue, setInputValue] = useState<string>(initialValue);
     const [filteredList, setFilteredList] = useState<DropdownItem[]>(resetDropdownTrayItems());
     const [canShowDropdownTray, setCanShowDropdownTray] = useState<boolean>(false);
 
     function resetDropdownTrayItems() {
-        const temp: DropdownItem[] = availableList.map(available => available);
-        selectedCategories.forEach((selectedCategory: any) => {
-            while (temp.findIndex((available: any) => available.displayName === selectedCategory.name) >= 0) {
-                temp.splice(temp.findIndex((available: any) => available.displayName === selectedCategory.name), 1);
-            }
-        })
+        // const temp: DropdownItem[] = availableList.map(available => available);
+        // selectedCategories.forEach((selectedCategory: any) => {
+        //     while (temp.findIndex((available: any) => available.displayName === selectedCategory.name) >= 0) {
+        //         temp.splice(temp.findIndex((available: any) => available.displayName === selectedCategory.name), 1);
+        //     }
+        // })
 
-        return temp;
+        // return temp;
+        return  availableList.map(available => available);
     }
 
     function showDropdownTray() {
@@ -48,12 +49,12 @@ function Dropdown({ availableList, dropdownParentCallback, itemIndex, initialVal
 
     function selectDropdownTrayItem(event: any) {
         setInputValue(event.target.textContent);
-        dropdownParentCallback(event.target.textContent, itemIndex);
+        dropdownParentCallback(event.target.textContent);
     }
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         setInputValue(event.target.value);
-        dropdownParentCallback(event.target.textContent, itemIndex);
+        dropdownParentCallback(event.target.textContent);
     }
 
     return (
