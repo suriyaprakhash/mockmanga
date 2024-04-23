@@ -20,41 +20,57 @@ interface Category {
 }
 
 
-function Category({selectedCategory: initialSelectedCategory, index, availableCategories, selectedCategories,
+function Category({ selectedCategory: initialSelectedCategory, index, availableCategories, selectedCategories,
     updateCategory, removeCategory }: CategoryProps) {
 
-    const [currentSelectedCategory, setCurrentSelectedCategory] = useState<SelectedCategory>({
-        name: initialSelectedCategory.name,
-        userColumnName: initialSelectedCategory.userColumnName
-    });
+    // const [currentSelectedCategory, setCurrentSelectedCategory] = useState<SelectedCategory>({
+    //     name: initialSelectedCategory.name,
+    //     userColumnName: initialSelectedCategory.userColumnName
+    // });
 
     const availableCategoriesDropdowns: DropdownItem[] = availableCategories.map((availableCategory: Category) => ({
         displayName: availableCategory.name,
         desc: availableCategory.desc,
-      }));
+    }));
 
-    useEffect(() => {
-        updateCategory({
-            name: currentSelectedCategory.name,
-            userColumnName: currentSelectedCategory.userColumnName
-    }, index);
-    }, [currentSelectedCategory])
+    // useEffect(() => {
+    //     updateCategory({
+    //         name: currentSelectedCategory.name,
+    //         userColumnName: currentSelectedCategory.userColumnName
+    // }, index);
+    // }, [currentSelectedCategory])
+
+    // function updateCurrentCategoryDropdown(selectedCategory: string) {
+    //     const filedName = currentSelectedCategory.userColumnName === '' ?  
+    //     availableCategories.find((category: Category) => category.name == initialSelectedCategory.name)?.defaultFieldName 
+    //     : currentSelectedCategory.userColumnName;
+    //     setCurrentSelectedCategory({
+    //         name: selectedCategory,
+    //         userColumnName: filedName
+    //     })
+    // }
+
+    // function updateCurrentFiledName(fieldName: string) {
+    //     setCurrentSelectedCategory({
+    //         name: currentSelectedCategory.name,
+    //         userColumnName: fieldName
+    //     })
+    // }
 
     function updateCurrentCategoryDropdown(selectedCategory: string) {
-        const filedName = currentSelectedCategory.userColumnName === '' ?  
-        availableCategories.find((category: Category) => category.name == initialSelectedCategory.name)?.defaultFieldName 
-        : currentSelectedCategory.userColumnName;
-        setCurrentSelectedCategory({
-            name: selectedCategory,
+        const category: Category | undefined = availableCategories.find((category: Category) => category.name == selectedCategory);
+        const filedName: string = category ? category.defaultFieldName! : '';
+        updateCategory({
+            name: category?.name,
             userColumnName: filedName
-        })
+        }, index)
     }
 
     function updateCurrentFiledName(fieldName: string) {
-        setCurrentSelectedCategory({
-            name: currentSelectedCategory.name,
+        updateCategory({
+            name: initialSelectedCategory.name,
             userColumnName: fieldName
-        })
+        }, index)
     }
 
     function removeCurrentCategory() {
@@ -64,11 +80,11 @@ function Category({selectedCategory: initialSelectedCategory, index, availableCa
     return (
         <div className="grid grid-cols-6">
             <div className="p-3 col-span-6 sm:col-span-3">
-                <Dropdown initialValue={currentSelectedCategory.name}
+                <Dropdown initialValue={initialSelectedCategory.name}
                     availableList={availableCategoriesDropdowns} dropdownParentCallback={updateCurrentCategoryDropdown} />
             </div>
             <div className="p-3 col-span-5 sm:col-span-2" key={'dropdown-field'}>
-                <Input initialValue={currentSelectedCategory.userColumnName!} inputParentCallback={updateCurrentFiledName}
+                <Input initialValue={initialSelectedCategory.userColumnName!} inputParentCallback={updateCurrentFiledName}
                     placeholder="Field name" type="string" />
             </div>
             <div className="p-3 col-span-1 sm:col-span-1">

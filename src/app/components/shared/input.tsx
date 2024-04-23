@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 type Type = 'number' | 'string';
 
-interface InputProps {
+export interface InputProps {
     placeholder: string;
     type: Type;
     inputParentCallback: any;
@@ -10,17 +10,17 @@ interface InputProps {
     initialValue: string | number;
 }
 
-function Input(inputProps: InputProps) {
+function Input({placeholder, type, inputParentCallback, index, initialValue}: InputProps) {
 
-    const [inputValue, setInputValue] = useState<string | number>(init());
+    // const [inputValue, setInputValue] = useState<string | number>(init());
 
-    function init() {
-        if (inputProps.type === 'number') {
-            return ''
-        } else {
-            return inputProps.initialValue === undefined ? '' : inputProps.initialValue
-        }
-    }
+    // function init() {
+    //     if (type === 'number') {
+    //         return ''
+    //     } else {
+    //         return initialValue
+    //     }
+    // }
 
     function handleInputChange(event: any) {
         // if (inputProps.type === 'number') {
@@ -30,16 +30,16 @@ function Input(inputProps: InputProps) {
         // } else {
         //     setInputValue(event.target.value);
         // }
-        setInputValue(event.target.value);
-        inputProps.inputParentCallback(event.target.value, inputProps.index);
+        // setInputValue(event.target.value);
+        inputParentCallback(event.target.value, index);
     }
 
     return (
         <div className="text-dropdown-text">
             <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none sm:hover:scale-110 transition-all"
-                placeholder={inputProps.placeholder}
-                value={inputValue}
-                type={inputProps.type}
+                placeholder={placeholder}
+                value={initialValue === 0 ? '' : initialValue}
+                type={type}
                 onChange={handleInputChange}
             />
         </div>

@@ -1,41 +1,34 @@
 import React, { useEffect, useState } from 'react'
+import Input from '../shared/input'
 
 function Test() {
 
-    const [num, setNum] = useState<number>(0);
-    const [addValid, setAddValid] = useState<boolean>(true);
-    const [subValid, setSubValid] = useState<boolean>(true);
+    // let a = 0;
+    const [a, setA] = useState(0);
+    const [str, setStr] = useState('init');
 
-    useEffect(() => {
-        if (num <= 0) {
-            setAddValid(true);
-        } else {
-            setAddValid(false);
-        }
-    },[num]);
+    // useEffect(() => {
 
-    useEffect(() => {
-        if (num >= 0) {
-            setSubValid(true);
-        } else {
-            setSubValid(false);
-        }
-    },[num]);
+    // }
+    // ,[str])
 
-    const add = () => {
-        setNum(num + 1);
+    const callback = (inputData: string) => {
+        console.log(inputData)
+        setStr(inputData)
     }
 
-    const sub = () => {
-        setNum(num - 1);
+    const buttonClick = (event: any) => {
+        setA(a + 1);
+        setStr(str +' '+ a)
     }
 
 
     return (
         <div className="flex flex-col">
-            <div> {num}</div>
-            {addValid && <button onClick={add}>add</button>}
-            {subValid && <button onClick={sub}>sub</button>}
+            
+            <Input initialValue={str} placeholder='test' type='string' inputParentCallback={callback}/>
+            {str}
+            <button onClick={buttonClick}>add</button>
         </div>
     )
 }

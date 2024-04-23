@@ -70,8 +70,11 @@ function Hero() {
     validateContent();
   }
 
-  function removeAllCategories() {
+  function removeAllCategoriesAndParameters() {
     setSelectedCategories([])
+    setParameters({
+      count: 0
+    })
   }
 
   function addCategory() {
@@ -186,7 +189,7 @@ function Hero() {
                 }
                 {selectedCategories.length > 3 &&
                   <button className="p-3 col-span-3 sm:col-start-6 sm:col-end-8 border-2 rounded-2xl 
-                    border-button-danger-bg sm:hover:scale-110 transition-all" onClick={() => removeAllCategories()}>Reset All</button>
+                    border-button-danger-bg sm:hover:scale-110 transition-all" onClick={() => removeAllCategoriesAndParameters()}>Reset All</button>
                 }
               </div>
             </div>

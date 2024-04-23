@@ -71,7 +71,7 @@ export const numberFakerCategory: FakerCategory[] = [
     {
         category: 'String - 10 Digit number',
         desc: 'String - 10 Digit number',
-        defaultFieldName: 'Phone number',
+        defaultFieldName: 'Number',
         methodName: 'tenDigitNumber',
         type: 'number',
         class: Number
