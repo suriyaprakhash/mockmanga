@@ -12,25 +12,8 @@ export interface InputProps {
 
 function Input({placeholder, type, inputParentCallback, index, initialValue}: InputProps) {
 
-    // const [inputValue, setInputValue] = useState<string | number>(init());
-
-    // function init() {
-    //     if (type === 'number') {
-    //         return ''
-    //     } else {
-    //         return initialValue
-    //     }
-    // }
 
     function handleInputChange(event: any) {
-        // if (inputProps.type === 'number') {
-        //     if (!Number.isNaN(Number(event.target.value))) {
-        //         setInputValue(Number(event.target.value) + '');
-        //     }
-        // } else {
-        //     setInputValue(event.target.value);
-        // }
-        // setInputValue(event.target.value);
         inputParentCallback(event.target.value, index);
     }
 

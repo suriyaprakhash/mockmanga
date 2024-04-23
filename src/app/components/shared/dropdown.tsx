@@ -17,19 +17,11 @@ export interface DropdownProps {
 
 function Dropdown({ availableList, dropdownParentCallback, initialValue }: DropdownProps) {
 
-    // const [inputValue, setInputValue] = useState<string>(initialValue);
     const [filteredList, setFilteredList] = useState<DropdownItem[]>(resetDropdownTrayItems());
     const [canShowDropdownTray, setCanShowDropdownTray] = useState<boolean>(false);
 
     function resetDropdownTrayItems() {
-        // const temp: DropdownItem[] = availableList.map(available => available);
-        // selectedCategories.forEach((selectedCategory: any) => {
-        //     while (temp.findIndex((available: any) => available.displayName === selectedCategory.name) >= 0) {
-        //         temp.splice(temp.findIndex((available: any) => available.displayName === selectedCategory.name), 1);
-        //     }
-        // })
 
-        // return temp;
         return  availableList.map(available => available);
     }
 
@@ -48,12 +40,10 @@ function Dropdown({ availableList, dropdownParentCallback, initialValue }: Dropd
     }
 
     function selectDropdownTrayItem(event: any) {
-        // setInputValue(event.target.textContent);
         dropdownParentCallback(event.target.textContent);
     }
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        // setInputValue(event.target.value);
         dropdownParentCallback(event.target.textContent);
     }
 

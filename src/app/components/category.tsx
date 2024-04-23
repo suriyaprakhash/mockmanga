@@ -23,39 +23,10 @@ interface Category {
 function Category({ selectedCategory: initialSelectedCategory, index, availableCategories, selectedCategories,
     updateCategory, removeCategory }: CategoryProps) {
 
-    // const [currentSelectedCategory, setCurrentSelectedCategory] = useState<SelectedCategory>({
-    //     name: initialSelectedCategory.name,
-    //     userColumnName: initialSelectedCategory.userColumnName
-    // });
-
     const availableCategoriesDropdowns: DropdownItem[] = availableCategories.map((availableCategory: Category) => ({
         displayName: availableCategory.name,
         desc: availableCategory.desc,
     }));
-
-    // useEffect(() => {
-    //     updateCategory({
-    //         name: currentSelectedCategory.name,
-    //         userColumnName: currentSelectedCategory.userColumnName
-    // }, index);
-    // }, [currentSelectedCategory])
-
-    // function updateCurrentCategoryDropdown(selectedCategory: string) {
-    //     const filedName = currentSelectedCategory.userColumnName === '' ?  
-    //     availableCategories.find((category: Category) => category.name == initialSelectedCategory.name)?.defaultFieldName 
-    //     : currentSelectedCategory.userColumnName;
-    //     setCurrentSelectedCategory({
-    //         name: selectedCategory,
-    //         userColumnName: filedName
-    //     })
-    // }
-
-    // function updateCurrentFiledName(fieldName: string) {
-    //     setCurrentSelectedCategory({
-    //         name: currentSelectedCategory.name,
-    //         userColumnName: fieldName
-    //     })
-    // }
 
     function updateCurrentCategoryDropdown(selectedCategory: string) {
         const category: Category | undefined = availableCategories.find((category: Category) => category.name == selectedCategory);

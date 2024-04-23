@@ -35,11 +35,6 @@ function Hero() {
     validateContent();
   }, [selectedCategories, parameters]);
 
-  // useEffect(() => {
-  //   computeAvailableCategories(selectedCategories);
-  // }, [selectedCategories]);
-
-
   function validateSelectedCategories(): void {
     const tempAvailableCategories: string[] = availableFakerCategories.map(availableCategory => availableCategory.category);
     const valid: boolean = selectedCategories.filter(selectedCategory => {
@@ -97,35 +92,6 @@ function Hero() {
     }
     setSelectedCategories(selectedCategories.map(item => item));
   }
-
-
-  function computeAvailableCategories(selectedCategories: SelectedCategory[]) {
-    // const tempAvailableCategories: (Category | null)[] = availableFakerCategories?.map((availableCategory: FakerCategory) => {
-    //   if (selectedCategories.find(selectedCategory => selectedCategory.name === availableCategory.category)) {
-    //     return null;
-    //   } else {
-    //     return {
-    //       name: availableCategory.category,
-    //       desc: availableCategory.desc,
-    //       defaultFieldName: availableCategory.defaultFieldName
-    //     }
-    //   }
-    // })
-    // const filteredAvailableCategories: Category[] = [];
-    // for (const category of tempAvailableCategories) {
-    //   if (category !== null) {
-    //     filteredAvailableCategories.push(category);
-    //   }
-    // }
-    const tempAvailableCategories: Category[] = availableFakerCategories.map(availableCategory => ({
-      name: availableCategory.category,
-      desc: availableCategory.desc,
-      defaultFieldName: availableCategory.defaultFieldName
-    }));
-    setAvailableCategories(tempAvailableCategories);
-
-  }
-
 
   return (
     <section>
