@@ -47,7 +47,7 @@ function Dropdown({ availableList, dropdownParentCallback, initialValue }: Dropd
     }
 
     return (
-        <div className="pb-2 text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
+        <div className="text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray}>
             <button className="w-full  ">
                 <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none"
                     placeholder="Category"

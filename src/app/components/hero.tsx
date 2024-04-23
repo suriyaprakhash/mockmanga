@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import Dropdown, { DropdownItem } from './shared/dropdown'
 import Input from './shared/input';
 import { Parameters } from './faker/Parameters';
@@ -9,9 +9,20 @@ import Link from 'next/link';
 import Image from 'next/image'
 import Category from './category';
 
+import {
+    DndContext, closestCorners, KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors
+} from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
+
 
 
 function Hero() {
+
+  const summaId = useId();
 
   const [availableCategories, setAvailableCategories] = useState<Category[]>(availableFakerCategories?.map((availableCategory: FakerCategory) => ({
     id: 0, // set to 0 - the actual id is manipulated by the selectedCategory length index
@@ -20,7 +31,7 @@ function Hero() {
     defaultFieldName: availableCategory.defaultFieldName
   })));
 
-  
+
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [selectedCategoriesValid, setSelectedCategoriesValid] = useState<boolean>(true);
 
@@ -106,6 +117,31 @@ function Hero() {
     })));
   }
 
+  const getTaskPos = (id: number) => selectedCategories.findIndex((category) => category.id === id);
+
+  const handleDragEnd = (event: any) => {
+      const { active, over } = event;
+
+      if (active.id === over.id) return;
+
+      setSelectedCategories((category) => {
+          const originalPos = getTaskPos(active.id);
+          const newPos = getTaskPos(over.id);
+          const originalPosSelectedCategory = selectedCategories[originalPos];
+          const newPosSelectedCategory = selectedCategories[newPos];
+          selectedCategories[newPos] = originalPosSelectedCategory;
+          selectedCategories[originalPos] = newPosSelectedCategory;
+
+          return selectedCategories.map((category: Category, index: number) => ({
+            id: index,
+            name: category.name,
+            defaultFieldName: category.defaultFieldName
+          }))
+
+          // return arrayMove(category, originalPos, newPos);
+      });
+  };
+
   return (
     <section>
       {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
@@ -118,7 +154,7 @@ function Hero() {
 
             <div className="text-button-danger-bg text-4xl font-semibold text-left animate-scale">
               Design, test, and iterate with effortless mocks.
-       
+
             </div>
 
             <div className="">
@@ -154,13 +190,24 @@ function Hero() {
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
-              <div className="">Select from the available datasets</div>
-              {selectedCategories.map((selectedCategory: Category, index: number) =>
-                <div key={index}>
-                  <Category selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
-                    selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />
-                </div>
-              )}
+              <div className="p-3">Select from the available datasets</div>
+
+              <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners} id={summaId}>
+
+                <SortableContext items={selectedCategories} strategy={verticalListSortingStrategy}>
+                  {selectedCategories.map((selectedCategory: Category, index: number) => {
+                    return (
+                      // <Task id={task.id} title={task.title} key={task.id} />
+                      <Category key={index} selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
+                      selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />
+                    )
+                  })}
+                </SortableContext>
+
+              </DndContext>
+
+
+
               <div className="p-3 grid grid-cols-8 gap-5">
                 {selectedCategoriesValid && selectedCategories.length > 0 &&
                   <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover 

@@ -2,6 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import Dropdown, { DropdownItem } from './shared/dropdown'
 import Input from './shared/input';
 import { FakerCategory, availableFakerCategories } from './faker/FakerCategory';
+import Image from 'next/image'
+
+import {
+    DndContext, closestCorners, KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors
+} from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 interface CategoryProps {
     selectedCategory: Category;
@@ -21,6 +31,14 @@ interface Category {
 
 function Category({ selectedCategory: initialSelectedCategory, index, availableCategories, selectedCategories,
     updateCategory, removeCategory }: CategoryProps) {
+
+
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: index });
+
+    const style = {
+        transition,
+        transform: CSS.Transform.toString(transform),
+    };
 
     const availableCategoriesDropdowns: DropdownItem[] = availableCategories.map((availableCategory: Category) => ({
         displayName: availableCategory.name,
@@ -50,22 +68,39 @@ function Category({ selectedCategory: initialSelectedCategory, index, availableC
     }
 
     return (
-        <div className="grid grid-cols-6">
-            <div className="p-3 col-span-6 sm:col-span-3">
+        <div ref={setNodeRef} style={style}
+            // className="grid grid-cols-12 border-2 border-primary-text/5 rounded-2xl mb-3 mt-3 sm:hover:scale-105">
+            className="grid grid-cols-12 sm:hover:scale-105">
+
+            <div className="p-3 col-span-10 sm:col-span-1">
+                <div         {...attributes}
+                    {...listeners}>
+                    <button className="p-3 border-1 bg-dropdown-bg text-dropdown-text rounded-lg hover:bg-button-danger-bg-hover sm:hover:scale-125 transition-all"
+                        onClick={() => removeCurrentCategory()}
+                        disabled={selectedCategories.length == 0}>
+                        =
+                    </button>
+
+                </div>
+            </div>
+            <div className="p-3 col-span-10 sm:col-span-6">
                 <Dropdown initialValue={initialSelectedCategory.name}
                     availableList={availableCategoriesDropdowns} dropdownParentCallback={updateCurrentCategoryDropdown} />
             </div>
-            <div className="p-3 col-span-5 sm:col-span-2" key={'dropdown-field'}>
+            <div className="p-3 col-span-10 sm:col-span-4" key={'dropdown-field'}>
                 <Input initialValue={initialSelectedCategory.defaultFieldName!} inputParentCallback={updateCurrentFiledName}
                     placeholder="Field name" type="string" />
             </div>
-            <div className="p-3 col-span-1 sm:col-span-1">
+            <div className="p-3 col-span-2 sm:col-span-1">
                 <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover sm:hover:scale-125 transition-all"
                     onClick={() => removeCurrentCategory()}
                     disabled={selectedCategories.length == 0}>
                     x
                 </button>
             </div>
+
+
+
         </div>
     )
 }
