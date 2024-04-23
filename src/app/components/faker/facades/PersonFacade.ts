@@ -98,7 +98,7 @@ export const personFakerCategory: FakerCategory[] = [
     }, {
         category: 'Person - Age',
         desc: 'Age (0 - 130)',
-        defaultFieldName: 'Gender',
+        defaultFieldName: 'Age',
         type: 'number',
         methodName: 'age',
         class: Person

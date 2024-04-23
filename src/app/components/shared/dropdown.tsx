@@ -17,7 +17,7 @@ export interface DropdownProps {
 
 function Dropdown({ availableList, dropdownParentCallback, initialValue }: DropdownProps) {
 
-    const [inputValue, setInputValue] = useState<string>(initialValue);
+    // const [inputValue, setInputValue] = useState<string>(initialValue);
     const [filteredList, setFilteredList] = useState<DropdownItem[]>(resetDropdownTrayItems());
     const [canShowDropdownTray, setCanShowDropdownTray] = useState<boolean>(false);
 
@@ -48,12 +48,12 @@ function Dropdown({ availableList, dropdownParentCallback, initialValue }: Dropd
     }
 
     function selectDropdownTrayItem(event: any) {
-        setInputValue(event.target.textContent);
+        // setInputValue(event.target.textContent);
         dropdownParentCallback(event.target.textContent);
     }
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        setInputValue(event.target.value);
+        // setInputValue(event.target.value);
         dropdownParentCallback(event.target.textContent);
     }
 
@@ -62,7 +62,7 @@ function Dropdown({ availableList, dropdownParentCallback, initialValue }: Dropd
             <button className="w-full  ">
                 <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none"
                     placeholder="Category"
-                    value={inputValue}
+                    value={initialValue}
                     onChange={handleInputChange}
                     onKeyUp={filterDropdownTrayItems} />
             </button>

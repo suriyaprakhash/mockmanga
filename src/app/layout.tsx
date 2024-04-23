@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      {/* <div>
+      <div>
           <Script id="ga4-script1"
             strategy="afterInteractive" // Recommended for GTM
             src="https://www.googletagmanager.com/gtag/js?id=G-3DV7C2ZQFS"
@@ -34,7 +34,7 @@ export default function RootLayout({
           `,
             }}
           />
-        </div> */}
+        </div>
         {children}
       </body>
     </html>
