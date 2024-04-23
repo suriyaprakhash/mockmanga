@@ -186,7 +186,7 @@ function Hero() {
       }
 
       {selectedCategories.length > 0 &&
-        <div className="grid grid-cols-3 items-center min-h-[750px] sm:min-h-[76vh]">
+        <div className="grid grid-cols-3 items-center min-h-[750px] sm:min-h-[76vh] sm:pl-10 sm:pr-10 md:pl-20 md:pr-20">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="p-5">
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
