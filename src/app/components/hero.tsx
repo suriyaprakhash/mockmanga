@@ -9,21 +9,19 @@ import Link from 'next/link';
 import Image from 'next/image'
 import Category from './category';
 
-export interface SelectedCategory {
-  name: string;
-  userColumnName?: string;
-}
+
 
 function Hero() {
 
-
   const [availableCategories, setAvailableCategories] = useState<Category[]>(availableFakerCategories?.map((availableCategory: FakerCategory) => ({
+    id: 0, // set to 0 - the actual id is manipulated by the selectedCategory length index
     name: availableCategory.category,
     desc: availableCategory.desc,
     defaultFieldName: availableCategory.defaultFieldName
   })));
 
-  const [selectedCategories, setSelectedCategories] = useState<SelectedCategory[]>([]);
+  
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [selectedCategoriesValid, setSelectedCategoriesValid] = useState<boolean>(true);
 
   const [parameters, setParameters] = useState<Parameters>({
@@ -55,6 +53,7 @@ function Hero() {
   function download(string: 'csv' | 'json'): void {
     const generator = new Generator();
     parameters.type = string;
+    console.log(selectedCategories)
     generator.generate(parameters, selectedCategories);
   }
 
@@ -74,23 +73,37 @@ function Hero() {
 
   function addCategory() {
     selectedCategories.push({
+      id: selectedCategories.length + 1,
       name: '',
-      userColumnName: ''
+      defaultFieldName: ''
     });
-    setSelectedCategories(selectedCategories.map(item => item));
+    setSelectedCategories(selectedCategories.map((category: Category, index: number) => ({
+      id: index,
+      name: category.name,
+      defaultFieldName: category.defaultFieldName
+    })));
   }
 
   function removeCategory(index: number) {
     selectedCategories.splice(index, 1);
-    setSelectedCategories(selectedCategories.map(item => item));
+    setSelectedCategories(selectedCategories.map((category: Category, index: number) => ({
+      id: index,
+      name: category.name,
+      defaultFieldName: category.defaultFieldName
+    })));
   }
 
-  function updateCategory(selectedCategory: SelectedCategory, index: number) {
+  function updateCategory(selectedCategory: Category, index: number) {
     selectedCategories[index] = {
+      id: selectedCategory.id,
       name: selectedCategory.name,
-      userColumnName: selectedCategory.userColumnName
+      defaultFieldName: selectedCategory.defaultFieldName
     }
-    setSelectedCategories(selectedCategories.map(item => item));
+    setSelectedCategories(selectedCategories.map((category: Category, index: number) => ({
+      id: index,
+      name: category.name,
+      defaultFieldName: category.defaultFieldName
+    })));
   }
 
   return (
@@ -101,9 +114,11 @@ function Hero() {
         <section className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh] overflow-auto p-10">
 
           <div className="col-span-3 sm:col-span-2 p-3 text-3xl sm:pl-12 flex flex-col gap-24 sm:gap-10">
+            {/* <Test /> */}
 
             <div className="text-button-danger-bg text-4xl font-semibold text-left animate-scale">
               Design, test, and iterate with effortless mocks.
+       
             </div>
 
             <div className="">
@@ -140,7 +155,7 @@ function Hero() {
             <div className="p-5">
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
               <div className="">Select from the available datasets</div>
-              {selectedCategories.map((selectedCategory: SelectedCategory, index: number) =>
+              {selectedCategories.map((selectedCategory: Category, index: number) =>
                 <div key={index}>
                   <Category selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
                     selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />

@@ -1,4 +1,4 @@
-import { SelectedCategory } from "../hero";
+import Category from "../category";
 import { FakerCategory, availableFakerCategories } from "./FakerCategory";
 import { Parameters } from "./Parameters";
 import { writeStringArrayToCsv } from "./writers/csvWriter";
@@ -12,7 +12,7 @@ export class Generator {
             this.availableCategoriesMap.set(fakerCategory.category, fakerCategory));
     }
 
-    public generate(parameters: Parameters, selectedCategories: SelectedCategory[]) {
+    public generate(parameters: Parameters, selectedCategories: Category[]) {
         if (parameters.type === 'json') {
             this.handleJson(selectedCategories, parameters);
         } else {
@@ -20,7 +20,7 @@ export class Generator {
         }
     }
     
-    private handleJson(selectedCategories: SelectedCategory[], parameters: Parameters) {
+    private handleJson(selectedCategories: Category[], parameters: Parameters) {
         const indendSpace = ' ';
         const indendSpace2 = '  ';
         const semiColon = ':';
@@ -32,7 +32,7 @@ export class Generator {
             allItems.push(indendSpace + '{');
             for (let j = 0; j < selectedCategories.length; j++) {
                 const data: string[] = this.buildData(selectedCategories);
-                const item = indendSpace2 + '"' + selectedCategories[j].userColumnName + '"' + semiColon + indendSpace + data[j];
+                const item = indendSpace2 + '"' + selectedCategories[j].defaultFieldName + '"' + semiColon + indendSpace + data[j];
                 // allItems.push();
 
                 if (j + 1 < selectedCategories.length) {
@@ -53,11 +53,11 @@ export class Generator {
     }
 
 
-    private handleCsv(selectedCategories: SelectedCategory[], parameters: Parameters) {
+    private handleCsv(selectedCategories: Category[], parameters: Parameters) {
         const allItems: string[] = [];
         const headers: (string | undefined)[] = [];
         selectedCategories.forEach(selectedCategory => {
-            headers.push('"' + selectedCategory.userColumnName + '"')
+            headers.push('"' + selectedCategory.defaultFieldName + '"')
         });
         allItems.push(headers!.join(','));
         for (let i = 0; i < parameters.count; i++) {
@@ -67,7 +67,7 @@ export class Generator {
         writeStringArrayToCsv(allItems, 'csv');
     }
 
-    private buildData(selectedCategories: SelectedCategory[]): string[] {
+    private buildData(selectedCategories: Category[]): string[] {
         const lineItems: string[] = [];
         selectedCategories.forEach(selectedCategory => {
             const availableFakerCategory: FakerCategory | undefined = this.availableCategoriesMap.get(selectedCategory.name);

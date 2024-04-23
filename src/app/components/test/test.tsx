@@ -1,36 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import Input from '../shared/input'
+import React, { useEffect, useId, useState } from 'react'
+
+import {
+    DndContext, closestCorners, KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors
+} from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
+
+export const Task = ({ id, title }: any) => {
+
+    const { attributes, listeners, setNodeRef, transform, transition } =
+        useSortable({ id });
+
+    const style = {
+        transition,
+        transform: CSS.Transform.toString(transform),
+    };
+
+    return (
+        <div
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+        >
+            {title}
+        </div>
+    );
+}
+
+// export const Column = ({ tasks }: any) => {
+//     return (
+//         <div>Tasks -
+//         </div>
+//     )
+// }
 
 function Test() {
 
-    // let a = 0;
-    const [a, setA] = useState(0);
-    const [str, setStr] = useState('init');
+    const [tasks, setTasks] = useState([
+        { id: 1, title: 'one' },
+        { id: 2, title: 'two' },
+        { id: 3, title: 'three' }
+    ])
 
-    // useEffect(() => {
+    const summaId = useId();
 
-    // }
-    // ,[str])
+    const getTaskPos = (id: number) => tasks.findIndex((task) => task.id === id);
 
-    const callback = (inputData: string) => {
-        console.log(inputData)
-        setStr(inputData)
-    }
+    const handleDragEnd = (event: any) => {
+        const { active, over } = event;
 
-    const buttonClick = (event: any) => {
-        setA(a + 1);
-        setStr(str +' '+ a)
-    }
+        if (active.id === over.id) return;
+
+        setTasks((tasks) => {
+            const originalPos = getTaskPos(active.id);
+            const newPos = getTaskPos(over.id);
+
+            return arrayMove(tasks, originalPos, newPos);
+        });
+    };
+
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
+
+
 
 
     return (
         <div className="flex flex-col">
-            
-            <Input initialValue={str} placeholder='test' type='string' inputParentCallback={callback}/>
-            {str}
-            <button onClick={buttonClick}>add</button>
+            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}  id={summaId}>
+
+                <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
+                    {tasks.map((task: any) => {
+                        return (
+                            <Task id={task.id} title={task.title} key={task.id} />
+                        )
+                    })}
+                </SortableContext>
+                
+            </DndContext>
         </div>
     )
 }
+
+// https://www.youtube.com/watch?v=dL5SOdgMbRY
 
 export default Test

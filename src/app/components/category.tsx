@@ -1,24 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { SelectedCategory } from './hero'
 import Dropdown, { DropdownItem } from './shared/dropdown'
 import Input from './shared/input';
 import { FakerCategory, availableFakerCategories } from './faker/FakerCategory';
 
 interface CategoryProps {
-    selectedCategory: SelectedCategory;
+    selectedCategory: Category;
     index: number;
     availableCategories: Category[];
-    selectedCategories: SelectedCategory[];
+    selectedCategories: Category[];
     updateCategory: any;
     removeCategory: any;
 }
 
 interface Category {
+    id: number; // set to 0 - the actual id is manipulated by the selectedCategory length index
     name: string;
     desc?: string;
     defaultFieldName?: string;
 }
-
 
 function Category({ selectedCategory: initialSelectedCategory, index, availableCategories, selectedCategories,
     updateCategory, removeCategory }: CategoryProps) {
@@ -32,15 +31,17 @@ function Category({ selectedCategory: initialSelectedCategory, index, availableC
         const category: Category | undefined = availableCategories.find((category: Category) => category.name == selectedCategory);
         const filedName: string = category ? category.defaultFieldName! : '';
         updateCategory({
+            id: index,
             name: category?.name,
-            userColumnName: filedName
+            defaultFieldName: filedName
         }, index)
     }
 
     function updateCurrentFiledName(fieldName: string) {
         updateCategory({
+            id: index,
             name: initialSelectedCategory.name,
-            userColumnName: fieldName
+            defaultFieldName: fieldName
         }, index)
     }
 
@@ -55,7 +56,7 @@ function Category({ selectedCategory: initialSelectedCategory, index, availableC
                     availableList={availableCategoriesDropdowns} dropdownParentCallback={updateCurrentCategoryDropdown} />
             </div>
             <div className="p-3 col-span-5 sm:col-span-2" key={'dropdown-field'}>
-                <Input initialValue={initialSelectedCategory.userColumnName!} inputParentCallback={updateCurrentFiledName}
+                <Input initialValue={initialSelectedCategory.defaultFieldName!} inputParentCallback={updateCurrentFiledName}
                     placeholder="Field name" type="string" />
             </div>
             <div className="p-3 col-span-1 sm:col-span-1">

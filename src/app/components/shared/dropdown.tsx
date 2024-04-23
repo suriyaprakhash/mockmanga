@@ -1,5 +1,4 @@
 import React, { MouseEventHandler, useState } from 'react'
-import { SelectedCategory } from '../hero';
 
 export interface DropdownItem {
     id?: number,
