@@ -4,7 +4,8 @@ import {
     DndContext, closestCorners, KeyboardSensor,
     PointerSensor,
     useSensor,
-    useSensors
+    useSensors,
+    TouchSensor
 } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
@@ -65,6 +66,7 @@ function Test() {
 
     const sensors = useSensors(
         useSensor(PointerSensor),
+        useSensor(TouchSensor),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
         })
@@ -75,7 +77,7 @@ function Test() {
 
     return (
         <div className="flex flex-col">
-            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}  id={summaId}>
+            <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners}  id={summaId}>
 
                 <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
                     {tasks.map((task: any) => {

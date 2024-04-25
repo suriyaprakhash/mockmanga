@@ -13,7 +13,8 @@ import {
     DndContext, closestCorners, KeyboardSensor,
     PointerSensor,
     useSensor,
-    useSensors
+    useSensors,
+    TouchSensor
 } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
@@ -142,6 +143,16 @@ function Hero() {
       });
   };
 
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+        coordinateGetter: sortableKeyboardCoordinates,
+    })
+);
+
+
   return (
     <section>
       {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
@@ -192,7 +203,7 @@ function Hero() {
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
               <div className="p-3">Select from the available datasets</div>
 
-              <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners} id={summaId}>
+              <DndContext sensors={sensors} onDragEnd={handleDragEnd} collisionDetection={closestCorners} id={summaId}>
 
                 <SortableContext items={selectedCategories} strategy={verticalListSortingStrategy}>
                   {selectedCategories.map((selectedCategory: Category, index: number) => {

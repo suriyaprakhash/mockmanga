@@ -36,9 +36,9 @@ function Category({ selectedCategory: initialSelectedCategory, index, availableC
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: index });
 
     const style = {
-        transition,
         transform: CSS.Transform.toString(transform),
-    };
+        transition
+      };
 
     const availableCategoriesDropdowns: DropdownItem[] = availableCategories.map((availableCategory: Category) => ({
         displayName: availableCategory.name,
@@ -70,7 +70,7 @@ function Category({ selectedCategory: initialSelectedCategory, index, availableC
     return (
         <div ref={setNodeRef} style={style}
             // className="grid grid-cols-12 border-2 border-primary-text/5 rounded-2xl mb-3 mt-3 sm:hover:scale-105">
-            className="grid grid-cols-12 sm:hover:scale-105">
+            className="grid grid-cols-12 sm:hover:scale-105 touch-none">
 
             <div className="p-3 col-span-2 sm:col-span-1 flex flex-col items-center">
                 <div         {...attributes}
