@@ -73,7 +73,7 @@ function Category({ selectedCategory: initialSelectedCategory, index, availableC
             className="grid grid-cols-12 sm:hover:scale-105 touch-none">
 
             <div className="p-3 col-span-2 sm:col-span-1 flex flex-col items-center">
-                <div         {...attributes}
+                <div {...attributes}
                     {...listeners}>
                     <button className="p-3 border-1 bg-dropdown-bg text-dropdown-text rounded-lg hover:bg-button-danger-bg-hover sm:hover:scale-125 transition-all"
                         onClick={() => removeCurrentCategory()}
