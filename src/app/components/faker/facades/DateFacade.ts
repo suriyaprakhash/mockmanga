@@ -6,27 +6,31 @@ import moment from 'moment';
 
 export class DateFacade extends FakerFacade {
 
-    public static anytimeJustDate(): string {
+    public static justYear(): string {
+        return  (moment(faker.date.anytime())).format('YYYY');
+    }
+
+    public static justDate(): string {
         return  (moment(faker.date.anytime())).format('DD-MMM-YYYY');
     }
 
-    public static anytime(): string {
+    public static justDateTime(): string {
         return  (moment(faker.date.anytime())).format('DD-MMM-YYYY HH:mm:ss');
     }
 
-    public static last10years(): string {
+    public static dateTimeLast10years(): string {
         return (moment(faker.date.past({years: 10}))).format('DD-MMM-YYYY HH:mm:ss');
     }
 
-    public static last100years(): string {
+    public static dateTimeLast100years(): string {
         return (moment(faker.date.past({years: 100}))).format('DD-MMM-YYYY HH:mm:ss');
     }
 
-    public static next10years(): string {
+    public static dateTimeNext10years(): string {
         return (moment(faker.date.future({years: 10}))).format('DD-MMM-YYYY HH:mm:ss');
     }
 
-    public static next100years(): string {
+    public static dateTimeNext100years(): string {
         return (moment(faker.date.future({years: 100}))).format('DD-MMM-YYYY HH:mm:ss');
     }
 
@@ -34,43 +38,50 @@ export class DateFacade extends FakerFacade {
 
 export const dateFakerCategory: FakerCategory[] = [
     {
-        category: 'Date - Anytime just date',
+        category: 'Date - Anytime just year in YYYY',
+        desc: 'Date - Anytime just year',
+        defaultFieldName: 'Year',
+        methodName: 'justYear',
+        class: DateFacade
+    },
+    {
+        category: 'Date - Anytime just date in DD-MMM-YYYY',
         desc: 'Date - Anytime just date',
         defaultFieldName: 'Date',
-        methodName: 'anytimeJustDate',
+        methodName: 'justDate',
         class: DateFacade
     },
     {
         category: 'Date - Anytime in DD-MMM-YYYY HH:mm:ss',
         desc: 'Date - Anytime in DD-MMM-YYYY HH:mm:ss',
         defaultFieldName: 'Date',
-        methodName: 'anytime',
+        methodName: 'justDateTime',
         class: DateFacade
     },{
         category: 'Date - within last 10 years in DD-MMM-YYYY HH:mm:ss',
         desc: 'Date - within last 10 years in DD-MMM-YYYY HH:mm:ss',
         defaultFieldName: 'Date',
-        methodName: 'last10years',
+        methodName: 'dateTimeLast10years',
         class: DateFacade
     },
     {
         category: 'Date - within last 100 years in DD-MMM-YYYY HH:mm:ss',
         desc: 'Date -within last 100 years in DD-MMM-YYYY HH:mm:ss',
         defaultFieldName: 'Date',
-        methodName: 'last100years',
+        methodName: 'dateTimeLast100years',
         class: DateFacade
     },{
         category: 'Date - in next 10 years in DD-MMM-YYYY HH:mm:ss',
         desc: 'Date - in next 10 years in DD-MMM-YYYY HH:mm:ss',
         defaultFieldName: 'Date',
-        methodName: 'next10years',
+        methodName: 'dateTimeNext10years',
         class: DateFacade
     },
     {
         category: 'Date - in next 100 years in DD-MMM-YYYY HH:mm:ss',
         desc: 'Date - in next 100 years in DD-MMM-YYYY HH:mm:ss',
         defaultFieldName: 'Date',
-        methodName: 'next100years',
+        methodName: 'dateTimeNext100years',
         class: DateFacade
     }
 ]

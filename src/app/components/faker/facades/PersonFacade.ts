@@ -34,17 +34,6 @@ export class Person extends FakerFacade {
         }) + '';
     }
     
-    public static email(): string {
-        return faker.internet.email();
-    }
-
-    public static password(): string {
-        return faker.internet.password();
-    }
-
-    public static userName(): string {
-        return faker.internet.userName();
-    }
 
     public static bio(): string {
         return faker.person.bio();
@@ -101,25 +90,6 @@ export const personFakerCategory: FakerCategory[] = [
         defaultFieldName: 'Age',
         type: 'number',
         methodName: 'age',
-        class: Person
-    },{
-        category: 'Person - Email',
-        desc: 'Email address',
-        defaultFieldName: 'Email',
-        methodName: 'email',
-        class: Person
-    },{
-        category: 'Person - Password',
-        desc: 'Password',
-        defaultFieldName: 'Password',
-        methodName: 'password',
-        class: Person
-    },
-    {
-        category: 'Person - User Name',
-        desc: 'User Name',
-        defaultFieldName: 'User Name',
-        methodName: 'userName',
         class: Person
     },
     {

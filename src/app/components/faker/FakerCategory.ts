@@ -1,10 +1,18 @@
+import { animalFakerCategory } from "./facades/AnimalFacade";
+import { commerceFakerCategory } from "./facades/CommerceFacade";
 import { dateFakerCategory } from "./facades/DateFacade";
 import { FakerFacade } from "./facades/FakerFacade";
+import { financeFakerCategory } from "./facades/FinanceFacade";
+import { internetFakerCategory } from "./facades/InternetFacade";
 import { jobFakerCategory } from "./facades/JobFacade";
 import { locationFakerCategory } from "./facades/LocationFacade";
+import { musicFakerCategory } from "./facades/MusicFacade";
 import { personFakerCategory } from "./facades/PersonFacade";
 import { phoneFakerCategory } from "./facades/PhoneFacade";
+import { scienceFakerCategory } from "./facades/ScienceFacade";
 import { alphaFakerCategory, alphaNumericFakerCategory, numberFakerCategory, uuidFakerCategory } from "./facades/StringFacade";
+import { systemFakerCategory } from "./facades/SystemFacade";
+import { vehicleFakerCategory } from "./facades/VehicleFacade";
 
 export interface FakerCategory {
     category: string;
@@ -24,6 +32,14 @@ function initCategories(): FakerCategory[] {
         ...jobFakerCategory,
         ...numberFakerCategory, ...uuidFakerCategory, ...alphaFakerCategory, ...alphaNumericFakerCategory,
         ...dateFakerCategory,
-        ...locationFakerCategory];
+        ...locationFakerCategory,
+        ...internetFakerCategory,
+        ...commerceFakerCategory,
+        ...financeFakerCategory,
+        ...musicFakerCategory,
+        ...scienceFakerCategory,
+        ...animalFakerCategory,
+        ...systemFakerCategory,
+        ...vehicleFakerCategory];
     return tempCategories;
 }
