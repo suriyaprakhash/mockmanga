@@ -57,7 +57,7 @@ function CategorySelector({ availableList, dropdownParentCallback, initialValue 
             </button>
             {canShowDropdownTray && filteredList.length > 0 &&
                 <div className="">
-                    <ul className="bg-dropdown-tray-bg/90 p-3 h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto sm:hover:scale-110 transition-all">
+                    <ul className="bg-dropdown-tray-bg/90 p-3 max-h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto sm:hover:scale-110 transition-all">
                         {filteredList?.map((item) => (
                             <li className="p-2  hover:bg-secondary-bg/30 rounded-lg" onClick={selectDropdownTrayItem} key={item.displayName}>{item.displayName}</li>
                         ))}

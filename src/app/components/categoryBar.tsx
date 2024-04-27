@@ -97,10 +97,10 @@ function CategoryBar({ selectedCategory: initialSelectedCategory, index, availab
                                 <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M12 6h.01M12 12h.01M12 18h.01" />
                             </svg> */}
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
-                                <circle cx="17.75" cy="6.25" r="4.25" stroke="currentColor" stroke-width="1.5" />
-                                <circle cx="6.25" cy="6.25" r="4.25" stroke="currentColor" stroke-width="1.5" />
-                                <circle cx="17.75" cy="17.75" r="4.25" stroke="currentColor" stroke-width="1.5" />
-                                <circle cx="6.25" cy="17.75" r="4.25" stroke="currentColor" stroke-width="1.5" />
+                                <circle cx="17.75" cy="6.25" r="4.25" stroke="currentColor" strokeWidth="1.5" />
+                                <circle cx="6.25" cy="6.25" r="4.25" stroke="currentColor" strokeWidth="1.5" />
+                                <circle cx="17.75" cy="17.75" r="4.25" stroke="currentColor" strokeWidth="1.5" />
+                                <circle cx="6.25" cy="17.75" r="4.25" stroke="currentColor" strokeWidth="1.5" />
                             </svg>
                         </div>
                     }
@@ -116,7 +116,7 @@ function CategoryBar({ selectedCategory: initialSelectedCategory, index, availab
                 <Input initialValue={initialSelectedCategory.defaultFieldName!} inputParentCallback={updateCurrentFiledName}
                     placeholder="Field name" type="string" />
             </div>
-            <div className="p-3 col-span-2 sm:col-span-1 flex flex-col items-center">
+            <div className="p-3 col-span-2 sm:col-span-1">
                 <button className="p-3 border-1 bg-button-danger-bg text-button-danger-text rounded-lg hover:bg-button-danger-bg-hover sm:hover:scale-125 transition-all"
                     onClick={() => removeCurrentCategory()}
                     disabled={selectedCategories.length == 0}>

@@ -200,7 +200,7 @@ function Hero() {
       {selectedCategories.length > 0 &&
         <div className="grid grid-cols-3 items-center min-h-[750px] sm:min-h-[76vh] sm:pl-10 sm:pr-10 md:pl-20 md:pr-20">
           <section className="col-span-3 p-5 sm:col-span-2">
-            <div className="p-5">
+            <div className="flex flex-col">
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
               <div className="p-3">Select from the available datasets</div>
 
@@ -228,16 +228,16 @@ function Hero() {
                   </button>
                 }
                 {selectedCategories.length > 2 &&
-                  <button className="p-3 col-span-3 sm:col-start-6 sm:col-end-8 border-2 rounded-2xl 
+                  <button className="p-3 col-span-3 sm:col-start-7 sm:col-end-9 border-2 rounded-2xl 
                     border-button-danger-bg sm:hover:scale-110 transition-all" onClick={() => removeAllCategoriesAndParameters()}>Reset All</button>
                 }
               </div>
             </div>
           </section>
 
-          <section className=" col-span-3 p-5 sm:col-span-1 ">
+          <section className=" col-span-3 p-5 sm:col-span-1">
             {selectedCategories.length > 0 &&
-              <div className="p-3 pr-10 grid grid-cols-2 gap-6">
+              <div className="p-3 grid grid-cols-2 gap-6">
                 {/* <div className="sm:pl-4 col-span-2">Enter the no. of records to generate</div> */}
                 <div className="p-3 col-span-2" key={'param'}>
                   <Input initialValue={parameters.count} inputParentCallback={noOfRecords} placeholder="No of records to generate" type="number" />
@@ -245,7 +245,9 @@ function Hero() {
                 {selectedCategoriesValid &&
                   parametersValid &&
                   <div className="col-span-2 pl-10 pr-10 grid grid-cols-4 gap-6">
-                    <div className="p-5 col-span-4 text-center">Generate</div>
+                    <div className="col-span-4 sm:col-span-4 text-center">
+                      Generate
+                    </div>
                     <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all"
                       onClick={() => download('csv')}>
                       CSV
