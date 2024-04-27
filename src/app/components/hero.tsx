@@ -4,17 +4,18 @@ import { Parameters } from './faker/Parameters';
 import { FakerCategory, availableFakerCategories } from './faker/FakerCategory';
 import { Generator } from './faker/Generator';
 import Image from 'next/image'
-import CategoryBar, {  Category } from './categoryBar';
+import CategoryBar, { Category } from './categoryBar';
 
 import {
-    DndContext, closestCorners, KeyboardSensor,
-    PointerSensor,
-    useSensor,
-    useSensors,
-    TouchSensor
+  DndContext, closestCorners, KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  TouchSensor
 } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { now } from 'moment';
 
 
 
@@ -32,6 +33,8 @@ function Hero() {
 
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [selectedCategoriesValid, setSelectedCategoriesValid] = useState<boolean>(true);
+
+  const [processing, setProcessing] = useState<boolean>(false);
 
   const [parameters, setParameters] = useState<Parameters>({
     count: 0
@@ -59,11 +62,22 @@ function Hero() {
     validateSelectedCategories();
   }
 
-  function download(string: 'csv' | 'json'): void {
+  async function download(string: 'csv' | 'json'): Promise<void> {
     const generator = new Generator();
     parameters.type = string;
-    console.log(selectedCategories)
+    const start = new Date();
+    console.log('started ' + start)
+    // setProcessing(true)
     generator.generate(parameters, selectedCategories);
+    const end = new Date();
+    console.log('ended ' + end)
+    console.log('time taken ' + (end.getTime() - start.getTime()))
+    // .then(() => {
+    //   const end = new Date();
+    //   console.log('ended ' + end)
+    //   console.log('time taken ' + (end.getTime() - start.getTime()))
+    //   setProcessing(false)
+    // })
   }
 
   function noOfRecords(noOfRecords: string) {
@@ -118,30 +132,30 @@ function Hero() {
   const getTaskPos = (id: number) => selectedCategories.findIndex((category) => category.id === id);
 
   const handleDragEnd = (event: any) => {
-      const { active, over } = event;
+    const { active, over } = event;
 
-      if (active.id === over.id) return;
+    if (active.id === over.id) return;
 
-      setSelectedCategories((category) => {
-          const originalPos = getTaskPos(active.id);
-          const newPos = getTaskPos(over.id);
-          // const originalPosSelectedCategory = selectedCategories[originalPos];
-          // const newPosSelectedCategory = selectedCategories[newPos];
-          // selectedCategories[newPos] = originalPosSelectedCategory;
-          // selectedCategories[originalPos] = newPosSelectedCategory;
+    setSelectedCategories((category) => {
+      const originalPos = getTaskPos(active.id);
+      const newPos = getTaskPos(over.id);
+      // const originalPosSelectedCategory = selectedCategories[originalPos];
+      // const newPosSelectedCategory = selectedCategories[newPos];
+      // selectedCategories[newPos] = originalPosSelectedCategory;
+      // selectedCategories[originalPos] = newPosSelectedCategory;
 
-          const originalPosSelectedCategory = selectedCategories[originalPos];
-          selectedCategories.splice(originalPos, 1)
-          selectedCategories.splice(newPos, 0, originalPosSelectedCategory);
+      const originalPosSelectedCategory = selectedCategories[originalPos];
+      selectedCategories.splice(originalPos, 1)
+      selectedCategories.splice(newPos, 0, originalPosSelectedCategory);
 
-          return selectedCategories.map((category: Category, index: number) => ({
-            id: index,
-            name: category.name,
-            defaultFieldName: category.defaultFieldName
-          }))
+      return selectedCategories.map((category: Category, index: number) => ({
+        id: index,
+        name: category.name,
+        defaultFieldName: category.defaultFieldName
+      }))
 
-          // return arrayMove(category, originalPos, newPos);
-      });
+      // return arrayMove(category, originalPos, newPos);
+    });
   };
 
 
@@ -149,9 +163,9 @@ function Hero() {
     useSensor(PointerSensor),
     useSensor(TouchSensor),
     useSensor(KeyboardSensor, {
-        coordinateGetter: sortableKeyboardCoordinates,
+      coordinateGetter: sortableKeyboardCoordinates,
     })
-);
+  );
 
 
   return (
@@ -197,7 +211,13 @@ function Hero() {
         </section>
       }
 
-      {selectedCategories.length > 0 &&
+      {selectedCategories.length > 0 && processing &&
+        <section>
+          Processing, please wait ...
+        </section>
+      }
+
+      {selectedCategories.length > 0 && !processing &&
         <div className="grid grid-cols-3 items-center min-h-[750px] sm:min-h-[76vh] sm:pl-10 sm:pr-10 md:pl-20 md:pr-20">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="flex flex-col">
@@ -211,7 +231,7 @@ function Hero() {
                     return (
                       // <Task id={task.id} title={task.title} key={task.id} />
                       <CategoryBar key={index} selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
-                      selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />
+                        selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />
                     )
                   })}
                 </SortableContext>

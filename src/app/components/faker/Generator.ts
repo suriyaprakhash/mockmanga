@@ -1,7 +1,7 @@
-import CategoryBar from "../categoryBar";
+import CategoryBar, { Category } from "../categoryBar";
 import { FakerCategory, availableFakerCategories } from "./FakerCategory";
 import { Parameters } from "./Parameters";
-import { writeStringArrayToCsv } from "./writers/csvWriter";
+import { writeStringArray } from "./writers/fileWriter";
 
 export class Generator {
 
@@ -12,7 +12,7 @@ export class Generator {
             this.availableCategoriesMap.set(fakerCategory.category, fakerCategory));
     }
 
-    public generate(parameters: Parameters, selectedCategories: Category[]) {
+     public async generate(parameters: Parameters, selectedCategories: Category[]) {
         if (parameters.type === 'json') {
             this.handleJson(selectedCategories, parameters);
         } else {
@@ -49,7 +49,8 @@ export class Generator {
         }
         allItems.push(']');
         console.log(allItems);
-        writeStringArrayToCsv(allItems, 'json');
+        writeStringArray(allItems, 'json');
+        // exportData(allItems, 'json');
     }
 
 
@@ -64,7 +65,8 @@ export class Generator {
             allItems.push(this.buildData(selectedCategories).join(','));
         }
         console.log(allItems);
-        writeStringArrayToCsv(allItems, 'csv');
+        writeStringArray(allItems, 'csv');
+        // exportData(allItems, 'csv');
     }
 
     private buildData(selectedCategories: Category[]): string[] {
