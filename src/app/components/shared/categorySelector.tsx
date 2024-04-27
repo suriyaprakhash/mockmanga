@@ -1,22 +1,22 @@
 import React, { MouseEventHandler, useState } from 'react'
 
-export interface DropdownItem {
+export interface CategorySelectorItem {
     id?: number,
     displayName: string,
     desc?: string
 }
 
-export interface DropdownProps {
-    availableList: DropdownItem[],
+export interface CategorySelectorProps {
+    availableList: CategorySelectorItem[],
     // selectedCategories: SelectedCategory[];
     dropdownParentCallback: any,
     // itemIndex: number,
     initialValue: string
 }
 
-function Dropdown({ availableList, dropdownParentCallback, initialValue }: DropdownProps) {
+function CategorySelector({ availableList, dropdownParentCallback, initialValue }: CategorySelectorProps) {
 
-    const [filteredList, setFilteredList] = useState<DropdownItem[]>(resetDropdownTrayItems());
+    const [filteredList, setFilteredList] = useState<CategorySelectorItem[]>(resetDropdownTrayItems());
     const [canShowDropdownTray, setCanShowDropdownTray] = useState<boolean>(false);
 
     function resetDropdownTrayItems() {
@@ -48,7 +48,7 @@ function Dropdown({ availableList, dropdownParentCallback, initialValue }: Dropd
 
     return (
         <div className="text-dropdown-text" onMouseEnter={showDropdownTray} onMouseLeave={hideDropdownTray} >
-            <button className="w-full  ">
+            <button className="w-full ">
                 <input className="bg-dropdown-bg p-3 w-full rounded-lg focus:outline-none"
                     placeholder="Category"
                     value={initialValue}
@@ -74,4 +74,4 @@ function Dropdown({ availableList, dropdownParentCallback, initialValue }: Dropd
     )
 }
 
-export default Dropdown
+export default CategorySelector

@@ -1,4 +1,4 @@
-import Category from "../category";
+import CategoryBar from "../categoryBar";
 import { FakerCategory, availableFakerCategories } from "./FakerCategory";
 import { Parameters } from "./Parameters";
 import { writeStringArrayToCsv } from "./writers/csvWriter";

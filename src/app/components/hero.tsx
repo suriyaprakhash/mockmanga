@@ -1,13 +1,10 @@
 import React, { useEffect, useId, useState } from 'react'
-import Dropdown, { DropdownItem } from './shared/dropdown'
 import Input from './shared/input';
 import { Parameters } from './faker/Parameters';
 import { FakerCategory, availableFakerCategories } from './faker/FakerCategory';
 import { Generator } from './faker/Generator';
-import Test from './test/test';
-import Link from 'next/link';
 import Image from 'next/image'
-import Category from './category';
+import CategoryBar, {  Category } from './categoryBar';
 
 import {
     DndContext, closestCorners, KeyboardSensor,
@@ -128,10 +125,14 @@ function Hero() {
       setSelectedCategories((category) => {
           const originalPos = getTaskPos(active.id);
           const newPos = getTaskPos(over.id);
+          // const originalPosSelectedCategory = selectedCategories[originalPos];
+          // const newPosSelectedCategory = selectedCategories[newPos];
+          // selectedCategories[newPos] = originalPosSelectedCategory;
+          // selectedCategories[originalPos] = newPosSelectedCategory;
+
           const originalPosSelectedCategory = selectedCategories[originalPos];
-          const newPosSelectedCategory = selectedCategories[newPos];
-          selectedCategories[newPos] = originalPosSelectedCategory;
-          selectedCategories[originalPos] = newPosSelectedCategory;
+          selectedCategories.splice(originalPos, 1)
+          selectedCategories.splice(newPos, 0, originalPosSelectedCategory);
 
           return selectedCategories.map((category: Category, index: number) => ({
             id: index,
@@ -209,7 +210,7 @@ function Hero() {
                   {selectedCategories.map((selectedCategory: Category, index: number) => {
                     return (
                       // <Task id={task.id} title={task.title} key={task.id} />
-                      <Category key={index} selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
+                      <CategoryBar key={index} selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
                       selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />
                     )
                   })}
