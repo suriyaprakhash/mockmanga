@@ -2,6 +2,7 @@ import CategoryBar, { Category } from "../categoryBar";
 import { FakerCategory, availableFakerCategories } from "./FakerCategory";
 import { Parameters } from "./Parameters";
 import { writeStringArray } from "./writers/fileWriter";
+import { downloadArrayToFile } from "./writers/largeFileWriter";
 
 export class Generator {
 
@@ -48,9 +49,8 @@ export class Generator {
             }
         }
         allItems.push(']');
-        console.log(allItems);
-        writeStringArray(allItems, 'json');
-        // exportData(allItems, 'json');
+        // writeStringArray(allItems, 'json');
+        downloadArrayToFile(allItems, 'json');
     }
 
 
@@ -64,9 +64,8 @@ export class Generator {
         for (let i = 0; i < parameters.count; i++) {
             allItems.push(this.buildData(selectedCategories).join(','));
         }
-        console.log(allItems);
-        writeStringArray(allItems, 'csv');
-        // exportData(allItems, 'csv');
+        // writeStringArray(allItems, 'csv');
+        downloadArrayToFile(allItems, 'csv');
     }
 
     private buildData(selectedCategories: Category[]): string[] {
