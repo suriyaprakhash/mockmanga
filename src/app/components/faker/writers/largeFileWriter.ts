@@ -53,7 +53,7 @@ async function openIndexedDB(): Promise<IDBDatabase> {
     return blob;
   };
   
-  export const downloadArrayToFile = async (lineContent: string[],  type: 'csv' | 'json', filename = 'mockManga') => {
+  export const downloadArrayToFile = async (lineContent: string[],  type: 'csv' | 'json', filename = 'mockManga'): Promise<boolean>  => {
     const chunks: ArrayChunk[] = [];
     const array = lineContent.join('\n');
 
@@ -70,6 +70,7 @@ async function openIndexedDB(): Promise<IDBDatabase> {
     link.click();
   
     URL.revokeObjectURL(url); // Clean up memory usage
+    return true;
   };
 
 

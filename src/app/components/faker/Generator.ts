@@ -13,14 +13,14 @@ export class Generator {
             this.availableCategoriesMap.set(fakerCategory.category, fakerCategory));
     }
 
-     public async generate(parameters: Parameters, selectedCategories: Category[]) {
+    public  generate(parameters: Parameters, selectedCategories: Category[]): Promise<boolean> {
         if (parameters.type === 'json') {
-            this.handleJson(selectedCategories, parameters);
+            return new Promise(resolve => resolve(this.handleJson(selectedCategories, parameters)))
         } else {
-            this.handleCsv(selectedCategories, parameters);
+            return new Promise(resolve => resolve(this.handleCsv(selectedCategories, parameters)))
         }
     }
-    
+
     private handleJson(selectedCategories: Category[], parameters: Parameters) {
         const indendSpace = ' ';
         const indendSpace2 = '  ';
@@ -50,7 +50,7 @@ export class Generator {
         }
         allItems.push(']');
         // writeStringArray(allItems, 'json');
-        downloadArrayToFile(allItems, 'json');
+        return downloadArrayToFile(allItems, 'json');
     }
 
 
@@ -65,7 +65,7 @@ export class Generator {
             allItems.push(this.buildData(selectedCategories).join(','));
         }
         // writeStringArray(allItems, 'csv');
-        downloadArrayToFile(allItems, 'csv');
+        return downloadArrayToFile(allItems, 'csv');
     }
 
     private buildData(selectedCategories: Category[]): string[] {
@@ -78,10 +78,10 @@ export class Generator {
                 if (availableFakerCategory?.type == 'number') {
                     lineItems.push(parseInt(method(), 10) + '')
                 } else {
-                    lineItems.push('"'+ method() + '"'); // Call the method with argument
+                    lineItems.push('"' + method() + '"'); // Call the method with argument
                 }
             } else {
-              console.error(`"${availableFakerCategory?.methodName!}" is not a method of ${availableFakerCategory?.class}`);
+                console.error(`"${availableFakerCategory?.methodName!}" is not a method of ${availableFakerCategory?.class}`);
             }
         })
         return lineItems;

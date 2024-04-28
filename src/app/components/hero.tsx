@@ -35,6 +35,9 @@ function Hero() {
   const [selectedCategoriesValid, setSelectedCategoriesValid] = useState<boolean>(true);
 
   const [processing, setProcessing] = useState<boolean>(false);
+  const [result, setResult] = useState<{
+    message: string, show: boolean
+  }>({ message: '', show: false });
 
   const [parameters, setParameters] = useState<Parameters>({
     count: 0
@@ -44,6 +47,45 @@ function Hero() {
   useEffect(() => {
     validateContent();
   }, [selectedCategories, parameters]);
+
+
+  // useEffect(() => { 
+  //   if (processing) {
+  //     setTimeout(() => {
+  //       download(parameters.type!)
+  //     }, 100)
+  //   }
+  // }, [processing])
+
+  // useEffect(() => { 
+  //   if (doit) {
+  //     setTimeout(() => {
+  //       download(parameters.type!)
+  //     }, 100)
+  //   }
+  // }, [doit])
+
+  // useEffect(() => {
+  //   console.log('useEffect', processing)
+  //   if (processing) {
+  //     const generator = new Generator();
+  //     const start = new Date();
+  //     console.log('started processing ' + processing)
+  //     console.log('started ' + start)
+  //     try {
+  //       generator.generate(parameters, selectedCategories)
+  //     } catch (error) {
+  //       console.log(error)
+  //     } finally {
+  //       const end = new Date();
+  //       console.log('ended ' + end)
+  //       console.log('time taken ' + (end.getTime() - start.getTime()))
+  //       setProcessing(false)
+  //     }
+  //     console.log('here ')
+  //   }
+
+  // }, [processing]); 
 
   function validateSelectedCategories(): void {
     const tempAvailableCategories: string[] = availableFakerCategories.map(availableCategory => availableCategory.category);
@@ -62,23 +104,83 @@ function Hero() {
     validateSelectedCategories();
   }
 
-  async function download(string: 'csv' | 'json'): Promise<void> {
+  // function download(string: 'csv' | 'json') {
+  //   const generator = new Generator();
+  //   parameters.type = string;
+  //   setProcessing(true)
+  //   const start = new Date();
+  //   console.log('started processing ' + processing)
+  //   console.log('started ' + start)
+  //   try {
+  //     generator.generate(parameters, selectedCategories);
+  //     console.log('after', )
+  //   } catch (error) {
+  //     console.log(error)
+  //   } finally {
+  //     const end = new Date();
+  //     console.log('ended ' + end)
+  //     console.log('time taken ' + (end.getTime() - start.getTime()))
+  //     setProcessing(false)
+  //   }
+
+  //   // .then(() => {
+  //   //   const end = new Date();
+  //   //   console.log('ended ' + end)
+  //   //   console.log('time taken ' + (end.getTime() - start.getTime()))
+  //   //   // setProcessing(false)
+  //   // })
+  // }
+
+  // async function actualDownload(string: 'csv' | 'json') {
+  //   const start = new Date();
+  //   console.log('started ' + start)
+  //   try {
+  //     const generator = new Generator();
+  //     parameters.type = string;
+
+  //     return generator.generate(parameters, selectedCategories)
+  //   } catch (error) {
+  //     console.error('Error during processing:', error);
+  //   } finally {
+  //     const end = new Date();
+  //     console.log('ended ' + end);
+  //     console.log('time taken ' + (end.getTime() - start.getTime()));
+  //     setProcessing(false); // Always set processing to false
+  //   }
+  // }
+
+  // Button click handler
+  const download = (type: 'csv' | 'json') => {
+    setProcessing(true); // Indicate processing has started
+    //  actualDownload(type);
     const generator = new Generator();
-    parameters.type = string;
+    parameters.type = type;
     const start = new Date();
     console.log('started ' + start)
-    // setProcessing(true)
-    generator.generate(parameters, selectedCategories);
-    const end = new Date();
-    console.log('ended ' + end)
-    console.log('time taken ' + (end.getTime() - start.getTime()))
-    // .then(() => {
-    //   const end = new Date();
-    //   console.log('ended ' + end)
-    //   console.log('time taken ' + (end.getTime() - start.getTime()))
-    //   setProcessing(false)
-    // })
+    setTimeout(() => {
+      generator.generate(parameters, selectedCategories).then(() => {
+        const end = new Date();
+        console.log('ended ' + end);
+        console.log('time taken ' + (end.getTime() - start.getTime()));
+        setProcessing(false);
+        setResult({
+          message: (end.getTime() - start.getTime()) + '',
+          show: true
+        })
+        setTimeout(() => {
+          setResult({
+            message: '', show: false
+          })
+        }, 5000);
+      });
+    }, 50)
+
   }
+
+  // const myFunc = async (): Promise<boolean> => {
+  //   console.log('my async func')
+  //   return new Promise(resolve => resolve(true));
+  // }
 
   function noOfRecords(noOfRecords: string) {
     setParameters({
@@ -211,13 +313,23 @@ function Hero() {
         </section>
       }
 
-      {selectedCategories.length > 0 && processing &&
-        <section>
-          Processing, please wait ...
+      {selectedCategories.length > 0 && (processing == true || result.show) &&
+        <section className="h-[750px] sm:h-[76vh] content-center">
+          {processing == true &&
+            <div className="text-center animate-pulse transition-all">
+                mocking <span className="text-button-danger-bg text-2xl">manga</span>, please wait <span className="animate-ping">...</span>
+            </div>
+          }
+          {result.show &&
+            <div className="text-center transition-all">
+              generated in <span className="text-button-danger-bg animate-pulse text-2xl">{result.message}</span> ms
+            </div>
+          }
         </section>
       }
 
-      {selectedCategories.length > 0 && !processing &&
+
+      {selectedCategories.length > 0 && processing === false && result.show === false &&
         <div className="grid grid-cols-3 items-center min-h-[750px] sm:min-h-[76vh] sm:pl-10 sm:pr-10 md:pl-20 md:pr-20">
           <section className="col-span-3 p-5 sm:col-span-2">
             <div className="flex flex-col">
@@ -269,11 +381,27 @@ function Hero() {
                       Generate
                     </div>
                     <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all"
-                      onClick={() => download('csv')}>
+                      onClick={() => {
+                        // download('csv')
+                        setParameters({
+                          count: parameters.count,
+                          type: 'csv'
+                        })
+                        // setProcessing(true)
+                        download('csv')
+                      }
+                      }>
                       CSV
                     </button>
                     <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all"
-                      onClick={() => download('json')}>
+                      onClick={() => {
+                        // download('json')
+                        setParameters({
+                          count: parameters.count,
+                          type: 'json'
+                        })
+                        download('json')
+                      }}>
                       JSON
                     </button>
                   </div>
