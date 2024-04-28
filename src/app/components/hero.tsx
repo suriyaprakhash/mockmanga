@@ -373,6 +373,10 @@ function Hero() {
                 {/* <div className="sm:pl-4 col-span-2">Enter the no. of records to generate</div> */}
                 <div className="p-3 col-span-2" key={'param'}>
                   <Input initialValue={parameters.count} inputParentCallback={noOfRecords} placeholder="No of records to generate" type="number" />
+                  {parameters.count > 500000 && 
+                    <div className="p-5"><b className="text-button-danger-bg">Warning </b>
+                    Rendering these many records might take a while.</div>
+                  }
                 </div>
                 {selectedCategoriesValid &&
                   parametersValid &&
