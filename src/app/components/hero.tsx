@@ -17,8 +17,6 @@ import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, s
 import { CSS } from "@dnd-kit/utilities"
 import { now } from 'moment';
 
-
-
 function Hero() {
 
   const summaId = useId();
@@ -49,44 +47,6 @@ function Hero() {
   }, [selectedCategories, parameters]);
 
 
-  // useEffect(() => { 
-  //   if (processing) {
-  //     setTimeout(() => {
-  //       download(parameters.type!)
-  //     }, 100)
-  //   }
-  // }, [processing])
-
-  // useEffect(() => { 
-  //   if (doit) {
-  //     setTimeout(() => {
-  //       download(parameters.type!)
-  //     }, 100)
-  //   }
-  // }, [doit])
-
-  // useEffect(() => {
-  //   console.log('useEffect', processing)
-  //   if (processing) {
-  //     const generator = new Generator();
-  //     const start = new Date();
-  //     console.log('started processing ' + processing)
-  //     console.log('started ' + start)
-  //     try {
-  //       generator.generate(parameters, selectedCategories)
-  //     } catch (error) {
-  //       console.log(error)
-  //     } finally {
-  //       const end = new Date();
-  //       console.log('ended ' + end)
-  //       console.log('time taken ' + (end.getTime() - start.getTime()))
-  //       setProcessing(false)
-  //     }
-  //     console.log('here ')
-  //   }
-
-  // }, [processing]); 
-
   function validateSelectedCategories(): void {
     const tempAvailableCategories: string[] = availableFakerCategories.map(availableCategory => availableCategory.category);
     const valid: boolean = selectedCategories.filter(selectedCategory => {
@@ -104,50 +64,6 @@ function Hero() {
     validateSelectedCategories();
   }
 
-  // function download(string: 'csv' | 'json') {
-  //   const generator = new Generator();
-  //   parameters.type = string;
-  //   setProcessing(true)
-  //   const start = new Date();
-  //   console.log('started processing ' + processing)
-  //   console.log('started ' + start)
-  //   try {
-  //     generator.generate(parameters, selectedCategories);
-  //     console.log('after', )
-  //   } catch (error) {
-  //     console.log(error)
-  //   } finally {
-  //     const end = new Date();
-  //     console.log('ended ' + end)
-  //     console.log('time taken ' + (end.getTime() - start.getTime()))
-  //     setProcessing(false)
-  //   }
-
-  //   // .then(() => {
-  //   //   const end = new Date();
-  //   //   console.log('ended ' + end)
-  //   //   console.log('time taken ' + (end.getTime() - start.getTime()))
-  //   //   // setProcessing(false)
-  //   // })
-  // }
-
-  // async function actualDownload(string: 'csv' | 'json') {
-  //   const start = new Date();
-  //   console.log('started ' + start)
-  //   try {
-  //     const generator = new Generator();
-  //     parameters.type = string;
-
-  //     return generator.generate(parameters, selectedCategories)
-  //   } catch (error) {
-  //     console.error('Error during processing:', error);
-  //   } finally {
-  //     const end = new Date();
-  //     console.log('ended ' + end);
-  //     console.log('time taken ' + (end.getTime() - start.getTime()));
-  //     setProcessing(false); // Always set processing to false
-  //   }
-  // }
 
   // Button click handler
   const download = (type: 'csv' | 'json') => {
@@ -176,11 +92,6 @@ function Hero() {
     }, 50)
 
   }
-
-  // const myFunc = async (): Promise<boolean> => {
-  //   console.log('my async func')
-  //   return new Promise(resolve => resolve(true));
-  // }
 
   function noOfRecords(noOfRecords: string) {
     setParameters({
@@ -272,13 +183,11 @@ function Hero() {
 
   return (
     <section>
-      {/* Built on top of <Link className="text-button-text" href={'https://fakerjs.dev/'} target='_blank'>faker.js</Link> */}
 
       {selectedCategories.length == 0 &&
         <section className="grid grid-cols-3 items-center h-[750px] sm:h-[76vh] overflow-auto p-10">
 
           <div className="col-span-3 sm:col-span-2 p-3 text-3xl sm:pl-12 flex flex-col gap-24 sm:gap-10">
-            {/* <Test /> */}
 
             <div className="text-button-danger-bg text-4xl font-semibold text-left animate-scale">
               Design, test, and iterate with effortless mocks.
@@ -331,7 +240,7 @@ function Hero() {
 
       {selectedCategories.length > 0 && processing === false && result.show === false &&
         <div className="grid grid-cols-3 items-center min-h-[750px] sm:min-h-[76vh] sm:pl-10 sm:pr-10 md:pl-20 md:pr-20">
-          <section className="col-span-3 p-5 sm:col-span-2">
+          <section className="col-span-3 p-12 sm:p-5 sm:col-span-2">
             <div className="flex flex-col">
               <div className="text-button-danger-bg text-2xl pb-3">Get the data you need, instantly</div>
               <div className="p-3">Select from the available datasets</div>
@@ -341,7 +250,6 @@ function Hero() {
                 <SortableContext items={selectedCategories} strategy={verticalListSortingStrategy}>
                   {selectedCategories.map((selectedCategory: Category, index: number) => {
                     return (
-                      // <Task id={task.id} title={task.title} key={task.id} />
                       <CategoryBar key={index} selectedCategory={selectedCategory} index={index} availableCategories={availableCategories}
                         selectedCategories={selectedCategories} updateCategory={updateCategory} removeCategory={removeCategory} />
                     )
