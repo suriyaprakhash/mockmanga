@@ -16,13 +16,12 @@ export interface CategorySelectorProps {
 
 function CategorySelector({ availableList, dropdownParentCallback, initialValue }: CategorySelectorProps) {
 
-    const [filteredList, setFilteredList] = useState<CategorySelectorItem[]>(resetDropdownTrayItems());
+    const [filteredList, setFilteredList] = useState<CategorySelectorItem[]>(availableList);
     const [canShowDropdownTray, setCanShowDropdownTray] = useState<boolean>(false);
 
-    function resetDropdownTrayItems() {
-
-        return  availableList.map(available => available);
-    }
+    // function resetDropdownTrayItems() {
+    //     return  availableList.map(available => available);
+    // }
 
     function showDropdownTray() {
         setCanShowDropdownTray(true);
@@ -34,7 +33,7 @@ function CategorySelector({ availableList, dropdownParentCallback, initialValue 
 
     function filterDropdownTrayItems(event: any) {
         const inputFilterValue = event.target.value;
-        const tempList = filteredList.filter(filteredItem => filteredItem.displayName.toLocaleLowerCase().includes(inputFilterValue.toLocaleLowerCase()));
+        const tempList = availableList.filter(filteredItem => filteredItem.displayName.toLocaleLowerCase().includes(inputFilterValue.toLocaleLowerCase()));
         setFilteredList(inputFilterValue.length == 0 ? availableList : tempList);
     }
 
@@ -57,7 +56,8 @@ function CategorySelector({ availableList, dropdownParentCallback, initialValue 
             </button>
             {canShowDropdownTray && filteredList.length > 0 &&
                 <div className="">
-                    <ul className="bg-dropdown-tray-bg/90 p-3 max-h-32 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto sm:hover:scale-110 transition-all">
+                    <ul className="bg-dropdown-tray-bg/90 max-h-32 w-64 rounded-lg absolute cursor-pointer scroll-m-2 overflow-y-auto text-sm
+                        sm:hover:scale-110 transition-all">
                         {filteredList?.map((item) => (
                             <li className="p-2  hover:bg-secondary-bg/30 rounded-lg" onClick={selectDropdownTrayItem} key={item.displayName}>{item.displayName}</li>
                         ))}

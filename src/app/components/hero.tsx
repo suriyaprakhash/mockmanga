@@ -263,7 +263,7 @@ function Hero() {
               <div className="p-3 grid grid-cols-8 gap-5">
                 {/* {selectedCategoriesValid && selectedCategories.length > 0 && */}
                 <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover 
-                    sm:hover:scale-110 transition-all disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                    sm:hover:scale-110 transition-all disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:none"
                   onClick={() => addCategory()}
                   disabled={!selectedCategoriesValid || selectedCategories.length == 0}>
                   Add
@@ -295,8 +295,8 @@ function Hero() {
                     Generate
                   </div>
                   <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg 
-                        hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all  
-                        disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                        hover:bg-button-bg-hover  sm:hover:scale-110 transition-all  
+                        disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:none"
                     disabled={!selectedCategoriesValid || !parametersValid}
 
                     onClick={() => {
@@ -312,8 +312,8 @@ function Hero() {
                     CSV
                   </button>
                   <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg 
-                    hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all
-                    disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                    hover:bg-button-bg-hover sm:hover:scale-110 transition-all
+                    disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:none"
                     disabled={!selectedCategoriesValid || !parametersValid}
                     onClick={() => {
                       // download('json')
