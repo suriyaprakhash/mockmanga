@@ -226,7 +226,7 @@ function Hero() {
         <section className="h-[750px] sm:h-[76vh] content-center">
           {processing == true &&
             <div className="text-center animate-pulse transition-all">
-                mocking <span className="text-button-danger-bg text-2xl">manga</span>, please wait <span className="animate-ping">...</span>
+              mocking <span className="text-button-danger-bg text-2xl">manga</span>, please wait <span className="animate-ping">...</span>
             </div>
           }
           {result.show &&
@@ -261,12 +261,14 @@ function Hero() {
 
 
               <div className="p-3 grid grid-cols-8 gap-5">
-                {selectedCategoriesValid && selectedCategories.length > 0 &&
-                  <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover 
-                    sm:hover:scale-110 transition-all" onClick={() => addCategory()}>
-                    Add
-                  </button>
-                }
+                {/* {selectedCategoriesValid && selectedCategories.length > 0 && */}
+                <button className="p-3 col-span-5 sm:col-start-1 sm:col-end-3 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover 
+                    sm:hover:scale-110 transition-all disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                  onClick={() => addCategory()}
+                  disabled={!selectedCategoriesValid || selectedCategories.length == 0}>
+                  Add
+                </button>
+                {/* } */}
                 {selectedCategories.length > 2 &&
                   <button className="p-3 col-span-3 sm:col-start-7 sm:col-end-9 border-2 rounded-2xl 
                     border-button-danger-bg sm:hover:scale-110 transition-all" onClick={() => removeAllCategoriesAndParameters()}>Reset All</button>
@@ -281,43 +283,50 @@ function Hero() {
                 {/* <div className="sm:pl-4 col-span-2">Enter the no. of records to generate</div> */}
                 <div className="p-3 col-span-2" key={'param'}>
                   <Input initialValue={parameters.count} inputParentCallback={noOfRecords} placeholder="No of records to generate" type="number" />
-                  {parameters.count > 500000 && 
+                  {parameters.count > 500000 &&
                     <div className="p-5"><b className="text-button-danger-bg">Warning </b>
-                    Rendering these many records might take a while.</div>
+                      Rendering these many records might take a while.</div>
                   }
                 </div>
-                {selectedCategoriesValid &&
-                  parametersValid &&
-                  <div className="col-span-2 pl-10 pr-10 grid grid-cols-4 gap-6">
-                    <div className="col-span-4 sm:col-span-4 text-center">
-                      Generate
-                    </div>
-                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all"
-                      onClick={() => {
-                        // download('csv')
-                        setParameters({
-                          count: parameters.count,
-                          type: 'csv'
-                        })
-                        // setProcessing(true)
-                        download('csv')
-                      }
-                      }>
-                      CSV
-                    </button>
-                    <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all"
-                      onClick={() => {
-                        // download('json')
-                        setParameters({
-                          count: parameters.count,
-                          type: 'json'
-                        })
-                        download('json')
-                      }}>
-                      JSON
-                    </button>
+                {/* {selectedCategoriesValid &&
+                  parametersValid && */}
+                <div className="col-span-2 pl-10 pr-10 grid grid-cols-4 gap-6">
+                  <div className="col-span-4 sm:col-span-4 text-center">
+                    Generate
                   </div>
-                }
+                  <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg 
+                        hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all  
+                        disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                    disabled={!selectedCategoriesValid || !parametersValid}
+
+                    onClick={() => {
+                      // download('csv')
+                      setParameters({
+                        count: parameters.count,
+                        type: 'csv'
+                      })
+                      // setProcessing(true)
+                      download('csv')
+                    }
+                    }>
+                    CSV
+                  </button>
+                  <button className="p-5 col-span-2 sm:col-span-4 border-1 bg-button-bg text-button-text rounded-lg 
+                    hover:bg-button-bg-hover cursor-pointer sm:hover:scale-110 transition-all
+                    disabled:bg-button-bg/50 disabled:text-button-text/50 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                    disabled={!selectedCategoriesValid || !parametersValid}
+                    onClick={() => {
+                      // download('json')
+                      setParameters({
+                        count: parameters.count,
+                        type: 'json'
+                      })
+                      download('json')
+                    }}>
+                    JSON
+                  </button>
+                </div>
+                {/* } */}
               </div>
             }
           </section>
